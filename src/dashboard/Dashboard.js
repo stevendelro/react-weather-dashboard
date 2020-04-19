@@ -1,42 +1,45 @@
-import React from 'react';
-import clsx from 'clsx';
-import { fade, makeStyles } from '@material-ui/core/styles';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Drawer from '@material-ui/core/Drawer';
-import Box from '@material-ui/core/Box';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import List from '@material-ui/core/List';
-import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
-import Container from '@material-ui/core/Container';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import Link from '@material-ui/core/Link';
-import MenuIcon from '@material-ui/icons/Menu';
+import React, { useState } from 'react'
+import clsx from 'clsx'
+import { fade, makeStyles } from '@material-ui/core/styles'
+import CssBaseline from '@material-ui/core/CssBaseline'
+import Drawer from '@material-ui/core/Drawer'
+import Box from '@material-ui/core/Box'
+import AppBar from '@material-ui/core/AppBar'
+import Toolbar from '@material-ui/core/Toolbar'
+import List from '@material-ui/core/List'
+import Typography from '@material-ui/core/Typography'
+import Divider from '@material-ui/core/Divider'
+import IconButton from '@material-ui/core/IconButton'
+import Container from '@material-ui/core/Container'
+import Grid from '@material-ui/core/Grid'
+import Paper from '@material-ui/core/Paper'
+import Link from '@material-ui/core/Link'
+import MenuIcon from '@material-ui/icons/Menu'
 import SearchIcon from '@material-ui/icons/Search'
 import InputBase from '@material-ui/core/InputBase'
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import { mainListItems, secondaryListItems } from './listItems';
-import Chart from './Chart';
-import Deposits from './Deposits';
-import Orders from './Orders';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
+import LinearProgress from '@material-ui/core/LinearProgress'
+import { mainListItems, secondaryListItems } from './listItems'
+import Chart from './Chart'
+import RightNow from './RightNow'
+import Map from './Map'
+
+import { getLocationData, getWeather, capitalizeFirstLetter } from '../util/index'
 
 function Copyright() {
   return (
-    <Typography variant="body2" color="textSecondary" align="center">
+    <Typography variant='body2' color='textSecondary' align='center'>
       {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
+      <Link color='inherit' href='https://material-ui.com/'>
         Steven Del Rosario
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
     </Typography>
-  );
+  )
 }
 
-const drawerWidth = 240;
+const drawerWidth = 240
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -155,35 +158,64 @@ const useStyles = makeStyles(theme => ({
   fixedHeight: {
     height: 240,
   },
-}));
+}))
 
-export default function Dashboard() {
-  const classes = useStyles();
-  const [open, setOpen] = React.useState(true);
-  
+export default function Dashboard({ state, dispatch }) {
+  const classes = useStyles()
+  const [open, setOpen] = useState(true)
+  const [location, setLocation] = useState('')
+
+  const submitHandler = async e => {
+    e.preventDefault()
+    const { latitude, longitude, placeName, shortName } = await getLocationData(
+      location,
+      null,
+      null
+    )
+    dispatch({
+      type: 'SET_LOCATION',
+      payload: { placeName, latitude, longitude, shortName, searchedTerm: capitalizeFirstLetter(location) },
+    })
+    const weatherData = await getWeather(latitude, longitude)
+    dispatch({
+      type: 'SET_WEATHER',
+      payload: weatherData,
+    })
+    setLocation('')
+  }
+
   const handleDrawerOpen = () => {
-    setOpen(true);
-  };
+    setOpen(true)
+  }
   const handleDrawerClose = () => {
-    setOpen(false);
-  };
-  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+    setOpen(false)
+  }
+  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight)
 
   return (
     <div className={classes.root}>
       <CssBaseline />
-      <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
+      <AppBar
+        position='absolute'
+        className={clsx(classes.appBar, open && classes.appBarShift)}>
         <Toolbar className={classes.toolbar}>
           <IconButton
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
+            edge='start'
+            color='inherit'
+            aria-label='open drawer'
             onClick={handleDrawerOpen}
-            className={clsx(classes.menuButton, open && classes.menuButtonHidden)}
-          >
+            className={clsx(
+              classes.menuButton,
+              open && classes.menuButtonHidden
+            )}>
             <MenuIcon />
           </IconButton>
-          <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
+          <Typography
+            component='h1'
+            variant='h6'
+            color='inherit'
+            noWrap
+            className={classes.title}>
             React Weather Dashboard
           </Typography>
 
@@ -191,7 +223,7 @@ export default function Dashboard() {
             <div className={classes.searchIcon}>
               <SearchIcon />
             </div>
-            <form>
+            <form onSubmit={submitHandler}>
               <InputBase
                 placeholder='Enter Location..'
                 classes={{
@@ -199,20 +231,19 @@ export default function Dashboard() {
                   input: classes.inputInput,
                 }}
                 inputProps={{ 'aria-label': 'search' }}
-
+                value={location}
+                onChange={e => setLocation(e.target.value)}
               />
             </form>
           </div>
-
         </Toolbar>
       </AppBar>
       <Drawer
-        variant="permanent"
+        variant='permanent'
         classes={{
           paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
         }}
-        open={open}
-      >
+        open={open}>
         <div className={classes.toolbarIcon}>
           <IconButton onClick={handleDrawerClose}>
             <ChevronLeftIcon />
@@ -225,24 +256,37 @@ export default function Dashboard() {
       </Drawer>
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
-        <Container maxWidth="lg" className={classes.container}>
+        <Container maxWidth='lg' className={classes.container}>
           <Grid container spacing={3}>
+            {/* Right Now */}
+            <Grid item xs={12} md={4} lg={3}>
+            <Paper className={fixedHeightPaper}>
+                {state.noWeatherData || state.weather.loading ? (
+                  <LinearProgress />
+                ) : (
+                  <RightNow state={state} />
+                )}
+              </Paper>
+            </Grid>
             {/* Chart */}
             <Grid item xs={12} md={8} lg={9}>
               <Paper className={fixedHeightPaper}>
-                <Chart />
+                {state.noWeatherData || state.weather.loading ? (
+                  <LinearProgress />
+                ) : (
+                  <Chart state={state} />
+                )}
               </Paper>
             </Grid>
-            {/* Recent Deposits */}
-            <Grid item xs={12} md={4} lg={3}>
-              <Paper className={fixedHeightPaper}>
-                <Deposits />
-              </Paper>
-            </Grid>
-            {/* Recent Orders */}
+
+            {/*  Map */}
             <Grid item xs={12}>
               <Paper className={classes.paper}>
-                <Orders />
+                {state.noLocationData ? (
+                  <LinearProgress />
+                ) : (
+                  <Map state={state} />
+                )}
               </Paper>
             </Grid>
           </Grid>
@@ -252,5 +296,5 @@ export default function Dashboard() {
         </Container>
       </main>
     </div>
-  );
+  )
 }

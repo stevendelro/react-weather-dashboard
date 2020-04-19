@@ -3,66 +3,73 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListSubheader from '@material-ui/core/ListSubheader';
-import DashboardIcon from '@material-ui/icons/Dashboard';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import PeopleIcon from '@material-ui/icons/People';
-import BarChartIcon from '@material-ui/icons/BarChart';
-import LayersIcon from '@material-ui/icons/Layers';
-import AssignmentIcon from '@material-ui/icons/Assignment';
+import LocationOnIcon from '@material-ui/icons/LocationOn';
+import HistoryIcon from '@material-ui/icons/History';
 
 export const mainListItems = (
   <div>
     <ListItem button>
       <ListItemIcon>
-        <DashboardIcon />
       </ListItemIcon>
-      <ListItemText primary="Dashboard" />
+      <ListItemText primary="Quick Links" />
     </ListItem>
     <ListItem button>
       <ListItemIcon>
-        <ShoppingCartIcon />
+        <LocationOnIcon />
       </ListItemIcon>
-      <ListItemText primary="Orders" />
+      <ListItemText primary="San Diego" />
     </ListItem>
     <ListItem button>
       <ListItemIcon>
-        <PeopleIcon />
+        <LocationOnIcon />
       </ListItemIcon>
-      <ListItemText primary="Customers" />
+      <ListItemText primary="Boston" />
     </ListItem>
     <ListItem button>
       <ListItemIcon>
-        <BarChartIcon />
+        <LocationOnIcon />
       </ListItemIcon>
-      <ListItemText primary="Reports" />
+      <ListItemText primary="New York" />
     </ListItem>
     <ListItem button>
       <ListItemIcon>
-        <LayersIcon />
+        <LocationOnIcon />
       </ListItemIcon>
-      <ListItemText primary="Integrations" />
+      <ListItemText primary="Portland" />
+    </ListItem>
+    <ListItem button>
+      <ListItemIcon>
+        <LocationOnIcon />
+      </ListItemIcon>
+      <ListItemText primary="Austin" />
+    </ListItem>
+    <ListItem button>
+      <ListItemIcon>
+        <LocationOnIcon />
+      </ListItemIcon>
+      <ListItemText primary="Chicago" />
     </ListItem>
   </div>
 );
 
 export const secondaryListItems = (
   <div>
-    <ListSubheader inset>Saved reports</ListSubheader>
+    <ListSubheader inset>Search History</ListSubheader>
     <ListItem button>
       <ListItemIcon>
-        <AssignmentIcon />
+        <HistoryIcon />
       </ListItemIcon>
       <ListItemText primary="Current month" />
     </ListItem>
     <ListItem button>
       <ListItemIcon>
-        <AssignmentIcon />
+        <HistoryIcon />
       </ListItemIcon>
       <ListItemText primary="Last quarter" />
     </ListItem>
     <ListItem button>
       <ListItemIcon>
-        <AssignmentIcon />
+        <HistoryIcon />
       </ListItemIcon>
       <ListItemText primary="Year-end sale" />
     </ListItem>

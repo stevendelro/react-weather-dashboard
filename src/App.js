@@ -18,6 +18,7 @@ const initialState = {
   },
   location: {
     placeName: '',
+    shortName: '',
     latitude: '',
     longitude: '',
     timeSearched: '',
@@ -72,6 +73,8 @@ function App() {
             placeName: action.payload.placeName,
             latitude: action.payload.latitude,
             longitude: action.payload.longitude,
+            shortName: action.payload.shortName,
+            searchedTerm: action.payload.searchedTerm
           },
         }
       case 'LOG_LAST_CITY': {

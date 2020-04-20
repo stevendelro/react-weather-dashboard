@@ -20,7 +20,8 @@ import InputBase from '@material-ui/core/InputBase'
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
 import LinearProgress from '@material-ui/core/LinearProgress'
 import { mainListItems, secondaryListItems } from './listItems'
-import Chart from './Chart'
+import DailyChart from './DailyChart'
+import RightNowTable from './RightNowTable'
 import RightNow from './RightNow'
 import Map from './Map'
 
@@ -268,13 +269,14 @@ export default function Dashboard({ state, dispatch }) {
                 )}
               </Paper>
             </Grid>
-            {/* Chart */}
+            {/* DailyChart */}
             <Grid item xs={12} md={8} lg={9}>
               <Paper className={fixedHeightPaper}>
                 {state.noWeatherData || state.weather.loading ? (
                   <LinearProgress />
                 ) : (
-                  <Chart state={state} />
+                  
+                  <RightNowTable state={state} />
                 )}
               </Paper>
             </Grid>

@@ -13,7 +13,7 @@ import {
   Legend,
 } from 'recharts'
 
-export default function Chart({ state }) {
+export default function DailyChart({ state }) {
   const theme = useTheme()
   const [chartData, setChartData] = useState([])
 

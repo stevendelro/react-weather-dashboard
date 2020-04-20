@@ -162,7 +162,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function Dashboard({ state, dispatch }) {
   const classes = useStyles()
-  const [open, setOpen] = useState(true)
+  const [open, setOpen] = useState(false)
   const [location, setLocation] = useState('')
 
   const submitHandler = async e => {

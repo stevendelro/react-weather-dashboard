@@ -25,7 +25,11 @@ import RightNowTable from './RightNowTable'
 import RightNow from './RightNow'
 import Map from './Map'
 
-import { getLocationData, getWeather, capitalizeFirstLetter } from '../util/index'
+import {
+  getLocationData,
+  getWeather,
+  capitalizeFirstLetter,
+} from '../util/index'
 
 function Copyright() {
   return (
@@ -175,7 +179,13 @@ export default function Dashboard({ state, dispatch }) {
     )
     dispatch({
       type: 'SET_LOCATION',
-      payload: { placeName, latitude, longitude, shortName, searchedTerm: capitalizeFirstLetter(location) },
+      payload: {
+        placeName,
+        latitude,
+        longitude,
+        shortName,
+        searchedTerm: capitalizeFirstLetter(location),
+      },
     })
     const weatherData = await getWeather(latitude, longitude)
     dispatch({
@@ -261,7 +271,7 @@ export default function Dashboard({ state, dispatch }) {
           <Grid container spacing={3}>
             {/* Right Now */}
             <Grid item xs={12} md={4} lg={3}>
-            <Paper className={fixedHeightPaper}>
+              <Paper className={fixedHeightPaper}>
                 {state.noWeatherData || state.weather.loading ? (
                   <LinearProgress />
                 ) : (
@@ -269,18 +279,37 @@ export default function Dashboard({ state, dispatch }) {
                 )}
               </Paper>
             </Grid>
-            {/* DailyChart */}
+            {/* Right Now Table */}
             <Grid item xs={12} md={8} lg={9}>
-              <Paper className={fixedHeightPaper}>
+            <Paper className={fixedHeightPaper}>
                 {state.noWeatherData || state.weather.loading ? (
                   <LinearProgress />
                 ) : (
-                  
+                  <DailyChart state={state} />
+                )}
+              </Paper>
+
+            </Grid>
+            {/* Daily Chart */}
+            <Grid item xs={12} md={4} lg={3}>
+            <Paper className={classes.paper}>
+                {state.noWeatherData || state.weather.loading ? (
+                  <LinearProgress />
+                ) : (
                   <RightNowTable state={state} />
                 )}
               </Paper>
             </Grid>
-
+            <Grid item xs={12} md={8} lg={9}>
+            <Paper className={fixedHeightPaper}>
+                {state.noWeatherData || state.weather.loading ? (
+                  <LinearProgress />
+                ) : (
+                  <RightNowTable state={state} />
+                )}
+              </Paper>
+            </Grid>
+                  
             {/*  Map */}
             <Grid item xs={12}>
               <Paper className={classes.paper}>

@@ -9,36 +9,47 @@ import moment from 'moment'
 import Title from './Title'
 
 const useStyles = makeStyles(theme => ({
-  table: {
-    minWidth: 650,
-  },
+
 }))
 
 export default function RightNowTable({ state }) {
-
   const { currently } = state.weather
   const classes = useStyles()
   return (
     <React.Fragment>
       <Title>Right Now</Title>
       <Table className={classes.table}>
-      <caption>It's {(currently.summary).toLowerCase()} with clouds covering about {(currently.cloudCover * 100).toFixed(0)}% of the sky.</caption>
-        <TableHead>
-          <TableRow>
-            <TableCell>Rain</TableCell>
-            <TableCell>Wind</TableCell>
-            <TableCell>Humidity</TableCell>
-            <TableCell>Pressure</TableCell>
-            <TableCell>Visibility</TableCell>
-          </TableRow>
-        </TableHead>
+        <caption>
+          Right now it's {currently.summary.toLowerCase()}, with clouds covering about{' '}
+          {(currently.cloudCover * 100).toFixed(0)}% of the sky.
+        </caption>
+
         <TableBody>
-          <TableRow>
-            <TableCell>{`${currently.precipProbability.toFixed(0)}%`}</TableCell>
-            <TableCell>{`${currently.windSpeed.toFixed(0)}mph`}</TableCell>
-            <TableCell>{`${(currently.humidity * 100).toFixed(0)}%`}</TableCell>
-            <TableCell>{`${(currently.pressure * 0.0295301).toFixed(2)}in`}</TableCell>
-            <TableCell>{`${currently.visibility}mi${currently.visibility === 10 ? '+' : ''}`}</TableCell>
+          <TableRow hover={true}>
+            <TableCell size='small'>Rain</TableCell>
+            <TableCell size='small'>{`${currently.precipProbability.toFixed(
+              0
+            )}%`}</TableCell>
+          </TableRow>
+          <TableRow hover={true}>
+            <TableCell size='small'>Wind</TableCell>
+            <TableCell size='small'>{`${currently.windSpeed.toFixed(0)} mph`}</TableCell>
+          </TableRow>
+          <TableRow hover={true}>
+            <TableCell size='small'>Humidity</TableCell>
+            <TableCell size='small'>{`${(currently.humidity * 100).toFixed(0)}%`}</TableCell>
+          </TableRow>
+          <TableRow hover={true}>
+            <TableCell size='small'>Pressure</TableCell>
+            <TableCell size='small'>{`${(currently.pressure * 0.0295301).toFixed(
+              2
+            )} in`}</TableCell>
+          </TableRow>
+          <TableRow hover={true}>
+            <TableCell size='small'>Visibility</TableCell>
+            <TableCell size='small'>{`${currently.visibility} mi${
+              currently.visibility === 10 ? '+' : ''
+            }`}</TableCell>
           </TableRow>
         </TableBody>
       </Table>

@@ -279,7 +279,7 @@ export default function Dashboard({ state, dispatch }) {
                 )}
               </Paper>
             </Grid>
-            {/* Right Now Table */}
+            {/* Daily Chart */}
             <Grid item xs={12} md={8} lg={9}>
             <Paper className={fixedHeightPaper}>
                 {state.noWeatherData || state.weather.loading ? (
@@ -290,7 +290,7 @@ export default function Dashboard({ state, dispatch }) {
               </Paper>
 
             </Grid>
-            {/* Daily Chart */}
+            {/* Right Now Table */}
             <Grid item xs={12} md={4} lg={3}>
             <Paper className={classes.paper}>
                 {state.noWeatherData || state.weather.loading ? (

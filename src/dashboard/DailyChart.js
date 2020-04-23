@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import { useTheme } from '@material-ui/core/styles'
+import { makeStyles } from '@material-ui/core/styles'
+import Paper from '@material-ui/core/Paper'
+import Table from '@material-ui/core/Table'
+import TableBody from '@material-ui/core/TableBody'
+import TableCell from '@material-ui/core/TableCell'
+import TableRow from '@material-ui/core/TableRow'
 import Title from './Title'
 import {
   Area,
@@ -13,27 +18,47 @@ import {
   Legend,
 } from 'recharts'
 
+const useStyles = makeStyles(theme => ({
+  tooltip: {
+    padding: theme.spacing(2),
+    display: 'flex',
+    overflow: 'auto',
+    flexDirection: 'column',
+    allowEscapeViewBox: {
+      x: true,
+      y: true,
+    },
+  },
+}))
+
 export default function DailyChart({ state }) {
-  const theme = useTheme()
+  const classes = useStyles()
   const [chartData, setChartData] = useState([])
 
   const CustomTooltip = ({ active, payload }) => {
     if (active) {
       return (
-        <div>
+        <Paper className={classes.tooltip}>
           <h2>{payload[0].payload.more.date}</h2>
           <hr />
-          <p>High: {payload[0].payload.more.apparentTemperatureHigh.toFixed(0)}°F</p>
-          <p>Low: {payload[0].payload.more.apparentTemperatureLow.toFixed(0)}°F</p>
+          <p>
+            High: {payload[0].payload.more.apparentTemperatureHigh.toFixed(0)}°F
+          </p>
+          <p>
+            Low: {payload[0].payload.more.apparentTemperatureLow.toFixed(0)}°F
+          </p>
           {/* <p>Range: {payload[0].temperature[0]}°F - {payload[0].temperature[1]}°F </p> */}
-          <p>Chance of rain: {payload[0].payload.more.precipProbability * 100}%</p>
+          <p>
+            Chance of rain:{' '}
+            {(payload[0].payload.more.precipProbability * 100).toFixed(0)}%
+          </p>
           <p>{payload[0].payload.more.summary}</p>
-        </div>
-      );
+        </Paper>
+      )
     }
-  
-    return null;
-  };
+
+    return null
+  }
 
   useEffect(() => {
     state.weather.daily.data.forEach(day => {
@@ -48,11 +73,14 @@ export default function DailyChart({ state }) {
             day.apparentTemperatureLow.toFixed(0),
             day.apparentTemperatureHigh.toFixed(0),
           ],
-          more: day
-        }
+          more: day,
+          icon: day.icon,
+        },
       ])
     })
   }, [state.weather.daily.data])
+
+
 
   return (
     <>
@@ -78,7 +106,7 @@ export default function DailyChart({ state }) {
             stroke='#99ddcc'
             fill='#99ddcc'
           />
-          <Tooltip content={<CustomTooltip/>}/>
+          <Tooltip content={<CustomTooltip />} />
           <Legend />
         </ComposedChart>
       </ResponsiveContainer>

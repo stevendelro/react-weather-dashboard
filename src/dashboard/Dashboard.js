@@ -20,7 +20,7 @@ import InputBase from '@material-ui/core/InputBase'
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
 import LinearProgress from '@material-ui/core/LinearProgress'
 import { mainListItems, secondaryListItems } from './listItems'
-import DailyChart from './DailyChart'
+import UpcomingWeek from './UpcomingWeek'
 import RightNowTable from './RightNowTable'
 import RightNow from './RightNow'
 import Map from './Map'
@@ -163,6 +163,7 @@ const useStyles = makeStyles(theme => ({
   fixedHeight: {
     height: 240,
   },
+  
 }))
 
 export default function Dashboard({ state, dispatch }) {
@@ -270,8 +271,8 @@ export default function Dashboard({ state, dispatch }) {
         <Container maxWidth='lg' className={classes.container}>
           <Grid container spacing={3}>
             {/* Right Now */}
-            <Grid item xs={12} md={4} lg={3}>
-              <Paper className={fixedHeightPaper}>
+            <Grid justify='center' item xs={12} md={4} lg={3}>
+              <Paper className={classes.paper}>
                 {state.noWeatherData || state.weather.loading ? (
                   <LinearProgress />
                 ) : (
@@ -281,11 +282,11 @@ export default function Dashboard({ state, dispatch }) {
             </Grid>
             {/* Daily Chart */}
             <Grid item xs={12} md={8} lg={9}>
-            <Paper className={fixedHeightPaper}>
+            <Paper className={classes.paper}>
                 {state.noWeatherData || state.weather.loading ? (
                   <LinearProgress />
                 ) : (
-                  <DailyChart state={state} />
+                  <UpcomingWeek state={state} />
                 )}
               </Paper>
 

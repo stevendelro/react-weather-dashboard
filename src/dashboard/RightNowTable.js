@@ -1,54 +1,55 @@
 import React from 'react'
-import { makeStyles } from '@material-ui/core/styles'
+import { getCardinalDirection } from '../util/index'
 import Table from '@material-ui/core/Table'
 import TableBody from '@material-ui/core/TableBody'
 import TableCell from '@material-ui/core/TableCell'
 import TableRow from '@material-ui/core/TableRow'
 import Title from './Title'
 
-const useStyles = makeStyles(theme => ({
-
-}))
-
 export default function RightNowTable({ state }) {
   const { currently } = state.weather
-  const classes = useStyles()
   return (
     <React.Fragment>
       <Title>Right Now</Title>
-      <Table className={classes.table}>
-        <caption>
-          Right now it's {currently.summary.toLowerCase()}, with clouds covering about{' '}
-          {(currently.cloudCover * 100).toFixed(0)}% of the sky.
-        </caption>
-
+      <Table>
         <TableBody>
+
           <TableRow hover={true}>
             <TableCell size='small'>Rain</TableCell>
-            <TableCell size='small'>{`${currently.precipProbability.toFixed(
+            <TableCell align='right' size='small'>{`${currently.precipProbability.toFixed(
               0
             )}%`}</TableCell>
           </TableRow>
-          <TableRow hover={true}>
-            <TableCell size='small'>Wind</TableCell>
-            <TableCell size='small'>{`${currently.windSpeed.toFixed(0)} mph`}</TableCell>
-          </TableRow>
+
           <TableRow hover={true}>
             <TableCell size='small'>Humidity</TableCell>
-            <TableCell size='small'>{`${(currently.humidity * 100).toFixed(0)}%`}</TableCell>
-          </TableRow>
+            <TableCell align='right' size='small'>{`${(currently.humidity * 100).toFixed(0)}%`}</TableCell>
+          </TableRow>     
+
+          <TableRow hover={true}>
+            <TableCell size='small'>Visibility</TableCell>
+            <TableCell align='right' size='small'>{`${currently.visibility} mi${
+              currently.visibility === 10 ? '+' : ''
+            }`}</TableCell>
+          </TableRow>          
+
           <TableRow hover={true}>
             <TableCell size='small'>Pressure</TableCell>
-            <TableCell size='small'>{`${(currently.pressure * 0.0295301).toFixed(
+            <TableCell align='right' size='small'>{`${(currently.pressure * 0.0295301).toFixed(
               2
             )} in`}</TableCell>
           </TableRow>
+
           <TableRow hover={true}>
-            <TableCell size='small'>Visibility</TableCell>
-            <TableCell size='small'>{`${currently.visibility} mi${
-              currently.visibility === 10 ? '+' : ''
-            }`}</TableCell>
+            <TableCell size='small'>Wind</TableCell>
+            <TableCell align='right' size='small'>{getCardinalDirection(currently.windBearing)}{currently.windSpeed.toFixed(1)} mph </TableCell>
           </TableRow>
+
+          <TableRow hover={true}>
+            <TableCell size='small'>Cloud Coverage</TableCell>
+            <TableCell align='right' size='small'>{(currently.cloudCover * 100).toFixed(0)}% of sky</TableCell>
+          </TableRow>
+          
         </TableBody>
       </Table>
     </React.Fragment>

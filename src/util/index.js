@@ -5,7 +5,7 @@ export const mapBoxToken =
 
 // Returns a object with the browser geolocation coordinates as a promise.
 export const getPosition = () => {
-  return new Promise(function(resolve, reject) {
+  return new Promise(function (resolve, reject) {
     navigator.geolocation.getCurrentPosition(resolve, reject)
   })
 }
@@ -28,7 +28,9 @@ export const getLocationData = async (location, latitude, longitude) => {
       long = response.data.features[0].center[0]
       lat = response.data.features[0].center[1]
       placeName = response.data.features[0].place_name
-      shortName = captureFirstStringBeforeComma(response.data.features[0].place_name)
+      shortName = captureFirstStringBeforeComma(
+        response.data.features[0].place_name
+      )
     })
     .catch(error => console.error('ERROR DURING MAPBOX FETCH: ', error))
 
@@ -36,7 +38,7 @@ export const getLocationData = async (location, latitude, longitude) => {
     latitude: lat,
     longitude: long,
     placeName,
-    shortName
+    shortName,
   }
 }
 
@@ -60,5 +62,28 @@ export function captureFirstStringBeforeComma(str) {
 }
 
 export function capitalizeFirstLetter(str) {
-  return str.charAt(0).toUpperCase() + str.slice(1);
+  return str.charAt(0).toUpperCase() + str.slice(1)
+}
+
+export function getCardinalDirection(angle) {
+  if (typeof angle === 'string') angle = parseInt(angle)
+  if (angle <= 0 || angle > 360 || typeof angle === 'undefined') return '☈'
+  const arrows = {
+    north: '↑',
+    north_east: '↗',
+    east: '→',
+    south_east: '↘',
+    south: '↓',
+    south_west: '↙',
+    west: '←',
+    north_west: '↖',
+  }
+  const directions = Object.keys(arrows)
+  const degree = 360 / directions.length
+  angle = angle + degree / 2
+  for (let i = 0; i < directions.length; i++) {
+    if (angle >= i * degree && angle < (i + 1) * degree)
+      return arrows[directions[i]]
+  }
+  return arrows['north']
 }

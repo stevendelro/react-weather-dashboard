@@ -3,27 +3,27 @@ import styled from 'styled-components'
 
 function ClearDay() {
   const ResponsiveSVGContainer = styled.div`
-	display: inline-block;
-	position: relative;
-	width: 100%;
-	padding-bottom: 100%; 
-	vertical-align: middle; 
-	overflow: hidden; 
-`
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    padding-bottom: 100%;
+    vertical-align: middle;
+    overflow: hidden;
+  `
 
-const ResponsiveSVGContent = styled.svg`
-  display: inline-block;
-	position: absolute;
-	top: 0;
-	left: 0;
-`
+  const ResponsiveSVGContent = styled.svg`
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+  `
   return (
     <ResponsiveSVGContainer>
       <ResponsiveSVGContent
         xmlns='http://www.w3.org/2000/svg'
         width='100%'
         height='100%'
-        preserveAspectRatio="xMinYMin meet"
+        preserveAspectRatio='xMinYMin meet'
         x='0'
         y='0'
         version='1.1'

@@ -29,9 +29,13 @@ export default function UpcomingWeek({ state }) {
         },
       ])
     })
+    
   }, [state.weather.daily.data])
-  chartData.shift()
 
+  if (chartData.length === 8) {
+    chartData.shift()
+  }
+  
   return (
     <>
       <Grid

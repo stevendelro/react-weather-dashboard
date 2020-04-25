@@ -6,13 +6,9 @@ import Typography from '@material-ui/core/Typography'
 import serveIcon from '../icons/index'
 
 const useStyles = makeStyles({
-
   iconBox: {
-    width: '60%',
-  },
-  todayDate: {
-    marginTop: '20px',
-  },
+    width: '155px',
+  }
 })
 
 export default function RightNow({ state }) {
@@ -23,11 +19,9 @@ export default function RightNow({ state }) {
         <Typography align='center' component='h2' variant='h6' color='primary'>
           {state.weather.currently.today}
         </Typography>
-
         <Box className={classes.iconBox}>
           {serveIcon(state.weather.currently.icon)}
         </Box>
-
         <Typography align='center' component='p' variant='h2'>
           {Number(state.weather.currently.temperature).toFixed(0)}°F
         </Typography>
@@ -37,7 +31,6 @@ export default function RightNow({ state }) {
           gutterBottom>
           {state.weather.hourly.summary}
         </Typography>
-
       </Grid>
     </React.Fragment>
   )

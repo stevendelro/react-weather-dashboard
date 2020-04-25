@@ -280,7 +280,7 @@ export default function Dashboard({ state, dispatch }) {
         <List>{secondaryListItems}</List>
       </Drawer>
       {state.noWeatherData || state.weather.loading ? (
-        <LinearProgress className={classes.linearProgressBar} />
+        <LinearProgress className={classes.linearProgressBar} color='secondary'/>
       ) : (
         <main className={classes.content}>
           <div className={classes.appBarSpacer} />

@@ -22,7 +22,8 @@ import LinearProgress from '@material-ui/core/LinearProgress'
 import { mainListItems, secondaryListItems } from './listItems'
 import UpcomingWeek from './UpcomingWeek'
 import RightNowTable from './RightNowTable'
-import RightNow from './RightNow'
+import CurrentTemp from './CurrentTemp'
+import HourlyTable from './HourlyTable'
 import Map from './Map'
 
 import {
@@ -165,7 +166,7 @@ const useStyles = makeStyles(theme => ({
   },
   linearProgressBar: {
     width: '100%',
-    marginTop: '65px'
+    marginTop: '65px',
   },
 }))
 
@@ -280,40 +281,41 @@ export default function Dashboard({ state, dispatch }) {
         <List>{secondaryListItems}</List>
       </Drawer>
       {state.noWeatherData || state.weather.loading ? (
-        <LinearProgress className={classes.linearProgressBar} color='secondary'/>
+        <LinearProgress
+          className={classes.linearProgressBar}
+          color='secondary'
+        />
       ) : (
         <main className={classes.content}>
           <div className={classes.appBarSpacer} />
           <Container maxWidth='lg' className={classes.container}>
             <Grid container spacing={3}>
-              {/* Right Now */}
+
+              {/* CurrentTemp */}
               <Grid item xs={12} md={4} lg={3}>
                 <Paper className={fixedHeightPaper}>
-                  <RightNow state={state} />
+                  <CurrentTemp state={state} />
                 </Paper>
               </Grid>
-              {/* Daily Chart */}
+              {/* Upcoming Week */}
               <Grid item xs={12} md={8} lg={9}>
                 <Paper className={fixedHeightPaper}>
                   <UpcomingWeek state={state} />
                 </Paper>
               </Grid>
+              {/*  Map */}
+              <Grid item xs={12}>
+                <Map state={state} />
+              </Grid>
               {/* Right Now Table */}
               <Grid item xs={12} md={4} lg={3}>
-                <Paper className={classes.paper}>
+                <Paper className={fixedHeightPaper}>
                   <RightNowTable state={state} />
                 </Paper>
               </Grid>
               <Grid item xs={12} md={8} lg={9}>
                 <Paper className={fixedHeightPaper}>
-                  <RightNowTable state={state} />
-                </Paper>
-              </Grid>
-
-              {/*  Map */}
-              <Grid item xs={12}>
-                <Paper className={classes.paper}>
-                  <Map state={state} />
+                  <HourlyTable state={state} />
                 </Paper>
               </Grid>
             </Grid>

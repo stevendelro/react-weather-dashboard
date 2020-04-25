@@ -11,7 +11,7 @@ const useStyles = makeStyles({
   }
 })
 
-export default function RightNow({ state }) {
+export default function CurrentTemp({ state }) {
   const classes = useStyles()
   return (
     <React.Fragment>

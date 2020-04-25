@@ -15,6 +15,7 @@
     "react-map-gl": "^5.2.3",
     "react-scripts": "3.4.1",
     "recharts": "^1.8.5",
+    "styled-components": "^5.1.0",
     "uuid": "^7.0.3"
   },
   "scripts": {

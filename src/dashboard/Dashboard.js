@@ -271,7 +271,7 @@ export default function Dashboard({ state, dispatch }) {
         <Container maxWidth='lg' className={classes.container}>
           <Grid container spacing={3}>
             {/* Right Now */}
-            <Grid justify='center' item xs={12} md={4} lg={3}>
+            <Grid item xs={12} md={4} lg={3}>
               <Paper className={classes.paper}>
                 {state.noWeatherData || state.weather.loading ? (
                   <LinearProgress />

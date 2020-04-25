@@ -1,18 +1,11 @@
 import React from 'react'
-import { makeStyles } from '@material-ui/core/styles'
 import ReactMapGL, { Marker } from 'react-map-gl'
 
 import { mapBoxToken } from '../util/index'
 import Title from './Title'
 
-const useStyles = makeStyles(theme => ({
-  seeMore: {
-    marginTop: theme.spacing(3),
-  },
-}))
 
 export default function Map({ state }) {
-  const classes = useStyles()
   return (
     <>
       <Title>{state.location.placeName}</Title>

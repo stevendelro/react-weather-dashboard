@@ -1,39 +1,14 @@
 import React, { useState, useEffect } from 'react'
+import { v4 as uuidv4 } from 'uuid'
 import serveIcon from '../icons/index'
-import { makeStyles } from '@material-ui/core/styles'
-import Paper from '@material-ui/core/Paper'
+import Grid from '@material-ui/core/Grid'
 import Table from '@material-ui/core/Table'
 import TableBody from '@material-ui/core/TableBody'
 import TableCell from '@material-ui/core/TableCell'
 import TableRow from '@material-ui/core/TableRow'
 import Title from './Title'
-import {
-  Area,
-  CartesianGrid,
-  XAxis,
-  YAxis,
-  ResponsiveContainer,
-  Tooltip,
-  Bar,
-  ComposedChart,
-  Legend,
-} from 'recharts'
 
-const useStyles = makeStyles(theme => ({
-  tooltip: {
-    padding: theme.spacing(2),
-    display: 'flex',
-    overflow: 'auto',
-    flexDirection: 'column',
-    allowEscapeViewBox: {
-      x: true,
-      y: true,
-    },
-  },
-}))
-
-export default function DailyChart({ state }) {
-  const classes = useStyles()
+export default function UpcomingWeek({ state }) {
   const [chartData, setChartData] = useState([])
 
   useEffect(() => {
@@ -55,26 +30,33 @@ export default function DailyChart({ state }) {
       ])
     })
   }, [state.weather.daily.data])
+  chartData.shift()
 
   return (
     <>
-      <Title>Daily Forcast</Title>
+      <Grid
+        container
+        direction='row'
+        justify='space-between'
+        alignItems='flex-start'>
+        <Title>Daily Forcast</Title>
+      </Grid>
       <Table>
         <caption>{state.weather.daily.summary}</caption>
         <TableBody>
           <TableRow>
             {chartData.map(day => (
-              <TableCell>{day.weekday}</TableCell>
+              <TableCell key={uuidv4()}>{day.weekday}</TableCell>
             ))}
           </TableRow>
           <TableRow>
             {chartData.map(day => (
-              <TableCell>{serveIcon(day.icon)}</TableCell>
+              <TableCell key={uuidv4()}>{serveIcon(day.icon)}</TableCell>
             ))}
           </TableRow>
           <TableRow>
             {chartData.map(day => (
-              <TableCell>
+              <TableCell key={uuidv4()}>
                 {day.hi}°F/{day.lo}°F
               </TableCell>
             ))}

@@ -161,9 +161,12 @@ const useStyles = makeStyles(theme => ({
     flexDirection: 'column',
   },
   fixedHeight: {
-    height: 240,
+    height: 330,
   },
-  
+  linearProgressBar: {
+    width: '100%',
+    marginTop: '65px'
+  },
 }))
 
 export default function Dashboard({ state, dispatch }) {
@@ -204,6 +207,16 @@ export default function Dashboard({ state, dispatch }) {
   }
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight)
 
+  let locationTitle
+
+  if (state.noLocationData) {
+    locationTitle = 'React'
+  } else if (state.location.shortName) {
+    locationTitle = state.location.shortName
+  } else {
+    locationTitle = state.location.searchedTerm
+  }
+
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -228,7 +241,7 @@ export default function Dashboard({ state, dispatch }) {
             color='inherit'
             noWrap
             className={classes.title}>
-            React Weather Dashboard
+            {locationTitle} Weather Dashboard
           </Typography>
 
           <div className={classes.search}>
@@ -266,67 +279,50 @@ export default function Dashboard({ state, dispatch }) {
         <Divider />
         <List>{secondaryListItems}</List>
       </Drawer>
-      <main className={classes.content}>
-        <div className={classes.appBarSpacer} />
-        <Container maxWidth='lg' className={classes.container}>
-          <Grid container spacing={3}>
-            {/* Right Now */}
-            <Grid item xs={12} md={4} lg={3}>
-              <Paper className={classes.paper}>
-                {state.noWeatherData || state.weather.loading ? (
-                  <LinearProgress />
-                ) : (
+      {state.noWeatherData || state.weather.loading ? (
+        <LinearProgress className={classes.linearProgressBar} />
+      ) : (
+        <main className={classes.content}>
+          <div className={classes.appBarSpacer} />
+          <Container maxWidth='lg' className={classes.container}>
+            <Grid container spacing={3}>
+              {/* Right Now */}
+              <Grid item xs={12} md={4} lg={3}>
+                <Paper className={fixedHeightPaper}>
                   <RightNow state={state} />
-                )}
-              </Paper>
-            </Grid>
-            {/* Daily Chart */}
-            <Grid item xs={12} md={8} lg={9}>
-            <Paper className={classes.paper}>
-                {state.noWeatherData || state.weather.loading ? (
-                  <LinearProgress />
-                ) : (
+                </Paper>
+              </Grid>
+              {/* Daily Chart */}
+              <Grid item xs={12} md={8} lg={9}>
+                <Paper className={fixedHeightPaper}>
                   <UpcomingWeek state={state} />
-                )}
-              </Paper>
+                </Paper>
+              </Grid>
+              {/* Right Now Table */}
+              <Grid item xs={12} md={4} lg={3}>
+                <Paper className={classes.paper}>
+                  <RightNowTable state={state} />
+                </Paper>
+              </Grid>
+              <Grid item xs={12} md={8} lg={9}>
+                <Paper className={fixedHeightPaper}>
+                  <RightNowTable state={state} />
+                </Paper>
+              </Grid>
 
-            </Grid>
-            {/* Right Now Table */}
-            <Grid item xs={12} md={4} lg={3}>
-            <Paper className={classes.paper}>
-                {state.noWeatherData || state.weather.loading ? (
-                  <LinearProgress />
-                ) : (
-                  <RightNowTable state={state} />
-                )}
-              </Paper>
-            </Grid>
-            <Grid item xs={12} md={8} lg={9}>
-            <Paper className={fixedHeightPaper}>
-                {state.noWeatherData || state.weather.loading ? (
-                  <LinearProgress />
-                ) : (
-                  <RightNowTable state={state} />
-                )}
-              </Paper>
-            </Grid>
-                  
-            {/*  Map */}
-            <Grid item xs={12}>
-              <Paper className={classes.paper}>
-                {state.noLocationData ? (
-                  <LinearProgress />
-                ) : (
+              {/*  Map */}
+              <Grid item xs={12}>
+                <Paper className={classes.paper}>
                   <Map state={state} />
-                )}
-              </Paper>
+                </Paper>
+              </Grid>
             </Grid>
-          </Grid>
-          <Box pt={4}>
-            <Copyright />
-          </Box>
-        </Container>
-      </main>
+            <Box pt={4}>
+              <Copyright />
+            </Box>
+          </Container>
+        </main>
+      )}
     </div>
   )
 }

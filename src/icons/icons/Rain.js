@@ -1,23 +1,23 @@
 import React from 'react'
 import styled from 'styled-components'
 
+const ResponsiveSVGContainer = styled.div`
+  display: inline-block;
+  position: relative;
+  width: 100%;
+  padding-bottom: 100%;
+  vertical-align: middle;
+  overflow: hidden;
+`
+
+const ResponsiveSVGContent = styled.svg`
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: 0;
+`
+
 function Rain() {
-  const ResponsiveSVGContainer = styled.div`
-    display: inline-block;
-    position: relative;
-    width: 100%;
-    padding-bottom: 100%;
-    vertical-align: middle;
-    overflow: hidden;
-  `
-
-  const ResponsiveSVGContent = styled.svg`
-    display: inline-block;
-    position: absolute;
-    top: 0;
-    left: 0;
-  `
-
   return (
     <ResponsiveSVGContainer>
       <ResponsiveSVGContent

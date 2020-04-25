@@ -1,22 +1,23 @@
 import React from 'react'
 import styled from 'styled-components'
 
-function ClearNight() {
-  const ResponsiveSVGContainer = styled.div`
-    display: inline-block;
-    position: relative;
-    width: 100%;
-    padding-bottom: 100%;
-    vertical-align: middle;
-    overflow: hidden;
-  `
+const ResponsiveSVGContainer = styled.div`
+  display: inline-block;
+  position: relative;
+  width: 100%;
+  padding-bottom: 100%;
+  vertical-align: middle;
+  overflow: hidden;
+`
 
-  const ResponsiveSVGContent = styled.svg`
-    display: inline-block;
-    position: absolute;
-    top: 0;
-    left: 0;
-  `
+const ResponsiveSVGContent = styled.svg`
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: 0;
+`
+
+function ClearNight() {
   return (
     <ResponsiveSVGContainer>
       <ResponsiveSVGContent

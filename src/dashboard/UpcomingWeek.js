@@ -35,9 +35,6 @@ export default function UpcomingWeek({ state }) {
   return (
     <>
       <Table >
-        <caption style={{ textAlign: 'center' }}>
-          {state.weather.daily.summary}
-        </caption>
         <TableBody>
           <TableRow>
             {chartData.map(day => (

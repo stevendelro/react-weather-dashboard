@@ -208,16 +208,6 @@ export default function Dashboard({ state, dispatch }) {
   }
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight)
 
-  let locationTitle
-
-  if (state.noLocationData) {
-    locationTitle = 'React'
-  } else if (state.location.shortName) {
-    locationTitle = state.location.shortName
-  } else {
-    locationTitle = state.location.searchedTerm
-  }
-
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -242,7 +232,7 @@ export default function Dashboard({ state, dispatch }) {
             color='inherit'
             noWrap
             className={classes.title}>
-            {locationTitle} Weather Dashboard
+            React Weather Dashboard
           </Typography>
 
           <div className={classes.search}>
@@ -290,6 +280,11 @@ export default function Dashboard({ state, dispatch }) {
           <div className={classes.appBarSpacer} />
           <Container maxWidth='lg' className={classes.container}>
             <Grid container spacing={3}>
+            
+              {/*  Map */}
+              <Grid item xs={12}>
+                <Map state={state} />
+              </Grid>
 
               {/* CurrentTemp */}
               <Grid item xs={12} md={4} lg={3}>
@@ -297,22 +292,22 @@ export default function Dashboard({ state, dispatch }) {
                   <CurrentTemp state={state} />
                 </Paper>
               </Grid>
+
               {/* Upcoming Week */}
               <Grid item xs={12} md={8} lg={9}>
                 <Paper className={fixedHeightPaper}>
                   <UpcomingWeek state={state} />
                 </Paper>
               </Grid>
-              {/*  Map */}
-              <Grid item xs={12}>
-                <Map state={state} />
-              </Grid>
+
               {/* Right Now Table */}
               <Grid item xs={12} md={4} lg={3}>
                 <Paper className={fixedHeightPaper}>
                   <RightNowTable state={state} />
                 </Paper>
               </Grid>
+
+              {/* Hourly Table */}
               <Grid item xs={12} md={8} lg={9}>
                 <Paper className={fixedHeightPaper}>
                   <HourlyTable state={state} />

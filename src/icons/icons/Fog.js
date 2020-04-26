@@ -29,7 +29,7 @@ function Fog() {
         y='0'
         enableBackground='new 0 0 512.001 512.001'
         version='1.1'
-        viewBox='0 0 512.001 512.001'
+        viewBox='0 0 70 70'
         xmlSpace='preserve'>
         <path
           fill='#EDEBED'

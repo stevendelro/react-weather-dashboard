@@ -57,6 +57,12 @@ export default function RightNowTable({ state }) {
               {(currently.cloudCover * 100).toFixed(0)}% of sky
             </TableCell>
           </TableRow>
+          <TableRow hover={true}>
+            <TableCell size='small'>UV Index</TableCell>
+            <TableCell align='right' size='small'>
+              {currently.uvIndex}
+            </TableCell>
+          </TableRow>
         </TableBody>
       </Table>
     </React.Fragment>

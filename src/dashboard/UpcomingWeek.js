@@ -34,7 +34,7 @@ export default function UpcomingWeek({ state }) {
   }
   return (
     <>
-      <Table >
+      <Table>
         <TableBody>
           <TableRow>
             {chartData.map(day => (

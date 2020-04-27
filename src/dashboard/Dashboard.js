@@ -23,7 +23,7 @@ import { mainListItems, secondaryListItems } from './listItems'
 import UpcomingWeek from './UpcomingWeek'
 import RightNowTable from './RightNowTable'
 import CurrentTemp from './CurrentTemp'
-import HourlyTable from './HourlyTable'
+import HourlyChart from './HourlyChart'
 import Map from './Map'
 
 import {
@@ -287,14 +287,14 @@ export default function Dashboard({ state, dispatch }) {
               </Grid>
 
               {/* CurrentTemp */}
-              <Grid item xs={12} md={4} lg={3}>
+              <Grid item xs={12} md={4}>
                 <Paper className={fixedHeightPaper}>
                   <CurrentTemp state={state} />
                 </Paper>
               </Grid>
 
               {/* Upcoming Week */}
-              <Grid item xs={12} md={8} lg={9}>
+              <Grid item xs={12} md={8}>
                 <Paper className={fixedHeightPaper}>
                   <UpcomingWeek state={state} />
                 </Paper>
@@ -310,7 +310,7 @@ export default function Dashboard({ state, dispatch }) {
               {/* Hourly Table */}
               <Grid item xs={12} md={8} lg={9}>
                 <Paper className={fixedHeightPaper}>
-                  <HourlyTable state={state} />
+                  <HourlyChart state={state} />
                 </Paper>
               </Grid>
             </Grid>

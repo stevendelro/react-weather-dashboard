@@ -10,7 +10,7 @@ export default function RightNowTable({ state }) {
   const { currently } = state.weather
   return (
     <React.Fragment>
-      <Title>Right Now</Title>
+      <Title>Today</Title>
       <Table>
         <TableBody>
           <TableRow hover={true}>

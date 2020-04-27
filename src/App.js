@@ -39,12 +39,16 @@ function App() {
         action.payload.daily.data.forEach(day => {
           day.weekday = moment.unix(day.time).format('ddd')
           day.date = moment.unix(day.time).format('dddd M/D')
+          
+          // Format Timestamp to extract sunrise/sunset time.
+          day.sunrise = moment.unix(day.sunriseTime).format('ha')
+          day.sunset = moment.unix(day.sunsetTime).format('ha')
         })
-        // HOURLY: Format Timestamp to relative time
+        // HOURLY: Format Timestamp to hour of day.
         action.payload.hourly.data.forEach(hour => {
-          hour.relativeTime = moment.unix(hour.time).fromNow()
+          hour.thisHour = moment.unix(hour.time).format('ha')
         })
-
+        
         return {
           ...state,
           noWeatherData: false,
@@ -122,11 +126,13 @@ function App() {
     getPosition()
       .then(({ coords }) => getWeather(coords.latitude, coords.longitude))
       .then(initialWeather => {
+        console.log('initialweather', initialWeather)
         dispatch({
           type: 'SET_WEATHER',
           payload: initialWeather,
         })
       })
+      .catch(err => console.error(err))
   }, [])
 
   // Auto fetch the name of the browser's Geolocation coordinates.

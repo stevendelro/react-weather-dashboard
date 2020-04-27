@@ -6,8 +6,8 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
 import Grid from '@material-ui/core/Grid'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
-import { mapBoxToken } from '../util/index'
-import Title from './Title'
+import { mapBoxToken } from '../../util/index'
+import Title from '../Title'
 
 const useStyles = makeStyles(theme => ({
   root: {

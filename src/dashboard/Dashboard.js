@@ -20,11 +20,13 @@ import InputBase from '@material-ui/core/InputBase'
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
 import LinearProgress from '@material-ui/core/LinearProgress'
 import { mainListItems, secondaryListItems } from './listItems'
-import UpcomingWeek from './UpcomingWeek'
-import RightNowTable from './RightNowTable'
-import CurrentTemp from './CurrentTemp'
-import HourlyChart from './HourlyChart'
-import Map from './Map'
+
+import UpcomingWeek from './Main/UpcomingWeek'
+import RightNowTable from './Main/RightNowTable'
+import CurrentTemp from './Main/CurrentTemp'
+import Next24Chart from './Main/Next24Chart'
+import HourlyPage from './Hourly/HourlyPage'
+import Map from './Main/Map'
 
 import {
   getLocationData,
@@ -280,7 +282,6 @@ export default function Dashboard({ state, dispatch }) {
           <div className={classes.appBarSpacer} />
           <Container maxWidth='lg' className={classes.container}>
             <Grid container spacing={3}>
-            
               {/*  Map */}
               <Grid item xs={12}>
                 <Map state={state} />
@@ -310,7 +311,7 @@ export default function Dashboard({ state, dispatch }) {
               {/* Hourly Table */}
               <Grid item xs={12} md={8} lg={9}>
                 <Paper className={fixedHeightPaper}>
-                  <HourlyChart state={state} />
+                  <Next24Chart state={state} />
                 </Paper>
               </Grid>
             </Grid>

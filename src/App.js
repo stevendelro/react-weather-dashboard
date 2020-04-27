@@ -38,15 +38,17 @@ function App() {
         // DAILY: Format Timestamp to human legible weekday and day of month
         action.payload.daily.data.forEach(day => {
           day.weekday = moment.unix(day.time).format('ddd')
-          day.date = moment.unix(day.time).format('dddd M/D')
+          day.date = moment.unix(day.time).format('M/D')
           
           // Format Timestamp to extract sunrise/sunset time.
-          day.sunrise = moment.unix(day.sunriseTime).format('ha')
-          day.sunset = moment.unix(day.sunsetTime).format('ha')
+          day.sunrise = moment.unix(day.sunriseTime).format('h:mm')
+          day.sunset = moment.unix(day.sunsetTime).format('h:mm')
         })
         // HOURLY: Format Timestamp to hour of day.
         action.payload.hourly.data.forEach(hour => {
           hour.thisHour = moment.unix(hour.time).format('ha')
+          hour.tableHour = moment.unix(hour.time).format('h a')
+
         })
         
         return {

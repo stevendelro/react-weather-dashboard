@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
 import Grid from '@material-ui/core/Grid'
 
+import Map from '../Map'
 import HourTemp from './HourTemp'
 import HourHumidity from './HourHumidity'
 import HourUV from './HourUV'
@@ -29,6 +30,9 @@ function HourlyPage({ state }) {
   return (
     <>
       <Grid container spacing={3}>
+        <Grid item xs={12}>
+          <HourlyTable state={state} />
+        </Grid>
         <Grid item xs={12} md={6}>
           <Paper className={classes.paper}>
             <HourTemp state={state} />
@@ -62,12 +66,6 @@ function HourlyPage({ state }) {
         <Grid item xs={12} md={6}>
           <Paper className={classes.paper}>
             <HourBarometer state={state} />
-          </Paper>
-        </Grid>
-
-        <Grid item xs={12}>
-          <Paper className={classes.paper}>
-            <HourlyTable state={state} />
           </Paper>
         </Grid>
       </Grid>

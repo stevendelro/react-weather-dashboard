@@ -10,7 +10,7 @@ import {
 } from 'recharts'
 import Title from '../Title'
 
-export default function ByHourChart({ state }) {
+export default function HourTemp({ state }) {
   const [chartData, setChartData] = useState([])
 
   useEffect(() => {

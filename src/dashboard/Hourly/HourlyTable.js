@@ -5,6 +5,12 @@ import Table from '@material-ui/core/Table'
 import TableBody from '@material-ui/core/TableBody'
 import TableCell from '@material-ui/core/TableCell'
 import TableRow from '@material-ui/core/TableRow'
+import Grid from '@material-ui/core/Grid'
+import ExpansionPanel from '@material-ui/core/ExpansionPanel'
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
+import Title from '../Title'
 
 export default function HourlyTable({ state }) {
   const [chartData, setChartData] = useState([])
@@ -36,7 +42,22 @@ export default function HourlyTable({ state }) {
 
   return (
     <>
-      <Table>
+      <ExpansionPanel>
+        <ExpansionPanelSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls='panel1a-content'
+          id='panel1a-header'>
+          <Grid
+            container
+            direction='row'
+            justify='space-between'
+            alignItems='center'>
+            <Title>{state.location.placeName}</Title>
+            Details
+          </Grid>
+        </ExpansionPanelSummary>
+        <ExpansionPanelDetails>
+        <Table>
         <TableBody>
           <TableRow variant='head'>
             <TableCell size='small' align='left'>Time</TableCell>
@@ -72,6 +93,9 @@ export default function HourlyTable({ state }) {
           ))}
         </TableBody>
       </Table>
+        </ExpansionPanelDetails>
+      </ExpansionPanel>
     </>
   )
 }
+

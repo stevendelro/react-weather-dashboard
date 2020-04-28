@@ -11,7 +11,7 @@ export const getPosition = () => {
 }
 
 // Gets location data by location name or by latitude/longitude coordinates.
-export const getLocationData = async (location, latitude, longitude) => {
+export const getLocationData = async (location, latitude, longitude, dispatch) => {
   let lat, long, placeName, shortName, mapBoxUrl
 
   if (!location) {
@@ -32,7 +32,13 @@ export const getLocationData = async (location, latitude, longitude) => {
         response.data.features[0].place_name
       )
     })
-    .catch(error => console.error('ERROR DURING MAPBOX FETCH: ', error))
+    .catch(error => {
+      console.error('ERROR DURING MAPBOX FETCH: ', error)
+      dispatch({
+        type: 'ERROR_MAPBOX'
+      })
+      throw Error
+    })
 
   return {
     latitude: lat,
@@ -43,7 +49,7 @@ export const getLocationData = async (location, latitude, longitude) => {
 }
 
 // Fetches weather by latitude/longitude coordinates.
-export const getWeather = async (latitude, longitude) => {
+export const getWeather = async (latitude, longitude, dispatch) => {
   let weatherData
   const proxy = 'https://cors-anywhere.herokuapp.com/'
   const darkSkyToken = '49672afaebb7601daeb3e11bb45cc16f'
@@ -53,7 +59,13 @@ export const getWeather = async (latitude, longitude) => {
     .then(request => {
       weatherData = request.data
     })
-    .catch(error => console.log('ERROR DURING DARKSKY FETCH: ', error))
+    .catch(error => {
+      console.log('ERROR DURING DARKSKY FETCH: ', error)
+      dispatch({
+        type: 'ERROR_DARKSKY'
+      })
+      throw Error
+    })
   return weatherData
 }
 

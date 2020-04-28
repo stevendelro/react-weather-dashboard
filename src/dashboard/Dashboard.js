@@ -17,6 +17,7 @@ import SearchIcon from '@material-ui/icons/Search'
 import InputBase from '@material-ui/core/InputBase'
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
 import LinearProgress from '@material-ui/core/LinearProgress'
+import ErrorDialogue from './ErrorDialogue'
 import { MainListItems, SecondaryListItems } from './listItems'
 import servePage from './servePage'
 
@@ -191,7 +192,8 @@ export default function Dashboard({ state, dispatch }) {
     const { latitude, longitude, placeName, shortName } = await getLocationData(
       location,
       null,
-      null
+      null,
+      dispatch
     )
     dispatch({
       type: 'SET_LOCATION',
@@ -203,7 +205,7 @@ export default function Dashboard({ state, dispatch }) {
         searchedTerm: capitalizeFirstLetter(location),
       },
     })
-    const weatherData = await getWeather(latitude, longitude)
+    const weatherData = await getWeather(latitude, longitude, dispatch)
     dispatch({
       type: 'SET_WEATHER',
       payload: weatherData,
@@ -216,6 +218,10 @@ export default function Dashboard({ state, dispatch }) {
   }
   const handleDrawerClose = () => {
     setOpen(false)
+  }
+
+  if (state.error.isTrue) {
+    return <ErrorDialogue errorMessage={state.error.message} searchedTerm={location} />
   }
 
   return (

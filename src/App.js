@@ -6,7 +6,12 @@ import Dashboard from './dashboard/Dashboard'
 import { getWeather, getPosition, getLocationData } from './util/index'
 
 const initialState = {
-  error: false,
+  error: {
+    isTrue: false,
+    mapBoxError: false,
+    darkSkyError: false,
+    message: ''
+  },
   noWeatherData: true,
   noHistoryData: true,
   noLocationData: true,
@@ -22,6 +27,7 @@ const initialState = {
     latitude: '',
     longitude: '',
     timeSearched: '',
+    searchedTerm: ''
   },
   historyList: [],
 }
@@ -83,6 +89,24 @@ function App() {
             searchedTerm: action.payload.searchedTerm
           },
         }
+      case 'ERROR_MAPBOX':
+        return {
+          ...state,
+          error: {
+            isTrue: true,
+            mapBoxError: true,
+            message: 'Whoops. There was an error retrieving that location! Lets try again.'
+          }
+        }
+      case 'ERROR_DARKSKY':
+        return {
+          ...state,
+          error: {
+            isTrue: true,
+            darkSkyError: true,
+            message: 'Welp. We ran into a problem getting weather for that location! Lets try again.'
+          }
+        }
       case 'LOG_LAST_CITY': {
         // Splicing the history list to keep the most recent 7 searches.
         if (state.historyList.length > 7) {
@@ -124,24 +148,23 @@ function App() {
   }
   const [state, dispatch] = useReducer(reducer, initialState)
 
+  // Retrieve browser geolocation on initial load.
   useEffect(() => {
     getPosition()
-      .then(({ coords }) => getWeather(coords.latitude, coords.longitude))
+      .then(({ coords }) => getWeather(coords.latitude, coords.longitude, dispatch))
       .then(initialWeather => {
-        console.log('initialweather', initialWeather)
         dispatch({
           type: 'SET_WEATHER',
           payload: initialWeather,
         })
       })
-      .catch(err => console.error(err))
   }, [])
 
-  // Auto fetch the name of the browser's Geolocation coordinates.
+  // Auto fetch the location name of the browser's Geolocation coordinates.
   useEffect(() => {
     getPosition()
       .then(({ coords }) =>
-        getLocationData(null, coords.latitude, coords.longitude)
+        getLocationData(null, coords.latitude, coords.longitude, dispatch)
       )
       .then(locationData => {
         dispatch({

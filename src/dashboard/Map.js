@@ -9,6 +9,30 @@ import { mapBoxToken } from '../util/index'
 import Title from './Title'
 
 export default function Map({ state }) {
+  if (!state.location.latitude || !state.location.longitude) {
+    return (
+      <>
+      <ExpansionPanel>
+        <ExpansionPanelSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls='panel1a-content'
+          id='panel1a-header'>
+          <Grid
+            container
+            direction='row'
+            justify='space-between'
+            alignItems='center'>
+            <Title>{state.location.placeName}</Title>
+            {state.weather.daily.summary}
+          </Grid>
+        </ExpansionPanelSummary>
+        <ExpansionPanelDetails>
+          Map is currently unavailable.
+        </ExpansionPanelDetails>
+      </ExpansionPanel>
+    </>
+    )
+  }
   return (
     <>
       <ExpansionPanel>

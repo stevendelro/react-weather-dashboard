@@ -18,11 +18,6 @@ export default function UpcomingWeek({ state }) {
           date: day.date,
           lo: day.apparentTemperatureLow.toFixed(0),
           hi: day.apparentTemperatureHigh.toFixed(0),
-          temperature: [
-            day.apparentTemperatureLow.toFixed(0),
-            day.apparentTemperatureHigh.toFixed(0),
-          ],
-          more: day,
           icon: day.icon,
         },
       ])

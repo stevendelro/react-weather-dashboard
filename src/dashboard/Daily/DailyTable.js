@@ -63,7 +63,7 @@ export default function DailyTable({ state }) {
             justify='space-between'
             alignItems='center'>
             <Title>{state.location.placeName}</Title>
-            Details
+            Details each day
           </Grid>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>

@@ -53,7 +53,7 @@ export default function HourlyTable({ state }) {
             justify='space-between'
             alignItems='center'>
             <Title>{state.location.placeName}</Title>
-            Details
+            Details each hour
           </Grid>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>

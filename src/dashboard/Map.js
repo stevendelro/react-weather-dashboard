@@ -1,6 +1,5 @@
 import React from 'react'
 import ReactMapGL, { Marker } from 'react-map-gl'
-import { makeStyles } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid'
 import ExpansionPanel from '@material-ui/core/ExpansionPanel'
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
@@ -9,18 +8,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import { mapBoxToken } from '../util/index'
 import Title from './Title'
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    width: '100%',
-  },
-  heading: {
-    fontSize: theme.typography.pxToRem(15),
-    fontWeight: theme.typography.fontWeightRegular,
-  },
-}))
-
 export default function Map({ state }) {
-  const classes = useStyles()
   return (
     <>
       <ExpansionPanel>

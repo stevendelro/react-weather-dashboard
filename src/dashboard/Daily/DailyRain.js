@@ -26,7 +26,7 @@ export default function DailyRain({ state }) {
 
   return (
     <>
-      <Title>Rain</Title>
+      <Title>Chance of Rain</Title>
       <ResponsiveContainer minHeight='200px'>
         <BarChart
           data={chartData}

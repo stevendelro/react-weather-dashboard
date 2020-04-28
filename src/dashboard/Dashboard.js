@@ -20,8 +20,6 @@ import LinearProgress from '@material-ui/core/LinearProgress'
 import { MainListItems, SecondaryListItems } from './listItems'
 import servePage from './servePage'
 
-import HomePage from './Main/HomePage'
-
 import {
   getLocationData,
   getWeather,
@@ -163,6 +161,7 @@ export default function Dashboard({ state, dispatch }) {
   const [open, setOpen] = useState(false)
   const [location, setLocation] = useState('')
   const [displayedPage, setDisplayedPage] = useState('home')
+  const [appBarTitle, setAppBarTitle] = useState('React Weather Dashboard')
 
   const onClickHandler = async location => {
     const { latitude, longitude, placeName, shortName } = await getLocationData(
@@ -218,7 +217,6 @@ export default function Dashboard({ state, dispatch }) {
   const handleDrawerClose = () => {
     setOpen(false)
   }
-  // const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight)
 
   return (
     <div className={classes.root}>
@@ -244,7 +242,7 @@ export default function Dashboard({ state, dispatch }) {
             color='inherit'
             noWrap
             className={classes.title}>
-            React Weather Dashboard
+            {appBarTitle}
           </Typography>
 
           <div className={classes.search}>
@@ -279,11 +277,17 @@ export default function Dashboard({ state, dispatch }) {
         </div>
         <Divider />
         <List>
-          <MainListItems setPage={setDisplayedPage} />
+          <MainListItems
+            setPage={setDisplayedPage}
+            setAppBarTitle={setAppBarTitle}
+          />
         </List>
         <Divider />
         <List>
-          <SecondaryListItems onClickHandler={onClickHandler} />
+          <SecondaryListItems
+            onClickHandler={onClickHandler}
+            setAppBarTitle={setAppBarTitle}
+          />
         </List>
       </Drawer>
       {state.noWeatherData || state.weather.loading ? (

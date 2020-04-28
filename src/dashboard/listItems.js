@@ -14,32 +14,52 @@ import EuroIcon from '@material-ui/icons/Euro'
 import TranslateIcon from '@material-ui/icons/Translate'
 import AcUnitIcon from '@material-ui/icons/AcUnit'
 
-export const MainListItems = ({ setPage }) => {
+export const MainListItems = ({ setPage, setAppBarTitle }) => {
   return (
     <div>
       <ListItem>
         <ListItemIcon></ListItemIcon>
         <ListItemText primary='Menu' />
       </ListItem>
-      <ListItem button onClick={() => setPage('home')}>
+      <ListItem
+        button
+        onClick={() => {
+          setPage('home')
+          setAppBarTitle('React Weather Dashboard')
+        }}>
         <ListItemIcon>
           <LocationOnIcon />
         </ListItemIcon>
         <ListItemText primary='Main' />
       </ListItem>
-      <ListItem button onClick={() => setPage('hourly')}>
+      <ListItem
+        button
+        onClick={() => {
+          setPage('hourly')
+          setAppBarTitle('Hourly Weather')
+        }}>
         <ListItemIcon>
           <QueryBuilderIcon />
         </ListItemIcon>
         <ListItemText primary='Hourly' />
       </ListItem>
-      <ListItem button onClick={() => setPage('daily')}>
+      <ListItem
+        button
+        onClick={() => {
+          setPage('daily')
+          setAppBarTitle('Daily Weather')
+        }}>
         <ListItemIcon>
           <DateRangeIcon />
         </ListItemIcon>
         <ListItemText primary='Daily' />
       </ListItem>
-      <ListItem button onClick={() => setPage('history')}>
+      <ListItem
+        button
+        onClick={() => {
+          setPage('history')
+          setAppBarTitle('Search History')
+        }}>
         <ListItemIcon>
           <HistoryIcon />
         </ListItemIcon>
@@ -49,7 +69,9 @@ export const MainListItems = ({ setPage }) => {
   )
 }
 
-export const SecondaryListItems = ({ onClickHandler }) => {
+export const SecondaryListItems = ({
+  onClickHandler
+}) => {
   return (
     <div>
       <ListSubheader inset>Quick Links</ListSubheader>

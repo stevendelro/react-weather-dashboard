@@ -11,22 +11,16 @@ import Typography from '@material-ui/core/Typography'
 import Divider from '@material-ui/core/Divider'
 import IconButton from '@material-ui/core/IconButton'
 import Container from '@material-ui/core/Container'
-import Grid from '@material-ui/core/Grid'
-import Paper from '@material-ui/core/Paper'
 import Link from '@material-ui/core/Link'
 import MenuIcon from '@material-ui/icons/Menu'
 import SearchIcon from '@material-ui/icons/Search'
 import InputBase from '@material-ui/core/InputBase'
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
 import LinearProgress from '@material-ui/core/LinearProgress'
-import { mainListItems, secondaryListItems } from './listItems'
+import { MainListItems, SecondaryListItems } from './listItems'
+import servePage from './servePage'
 
-import UpcomingWeek from './Main/UpcomingWeek'
-import RightNowTable from './Main/RightNowTable'
-import CurrentTemp from './Main/CurrentTemp'
-import Next24Chart from './Main/Next24Chart'
-import HourlyPage from './Hourly/HourlyPage'
-import Map from './Main/Map'
+import HomePage from './Main/HomePage'
 
 import {
   getLocationData,
@@ -157,15 +151,7 @@ const useStyles = makeStyles(theme => ({
     paddingTop: theme.spacing(4),
     paddingBottom: theme.spacing(4),
   },
-  paper: {
-    padding: theme.spacing(2),
-    display: 'flex',
-    overflow: 'auto',
-    flexDirection: 'column',
-  },
-  fixedHeight: {
-    height: 330,
-  },
+
   linearProgressBar: {
     width: '100%',
     marginTop: '65px',
@@ -176,9 +162,33 @@ export default function Dashboard({ state, dispatch }) {
   const classes = useStyles()
   const [open, setOpen] = useState(false)
   const [location, setLocation] = useState('')
+  const [displayedPage, setDisplayedPage] = useState('home')
 
+  const onClickHandler = async location => {
+    const { latitude, longitude, placeName, shortName } = await getLocationData(
+      location,
+      null,
+      null
+    )
+    dispatch({
+      type: 'SET_LOCATION',
+      payload: {
+        placeName,
+        latitude,
+        longitude,
+        shortName,
+        searchedTerm: capitalizeFirstLetter(location),
+      },
+    })
+    const weatherData = await getWeather(latitude, longitude)
+    dispatch({
+      type: 'SET_WEATHER',
+      payload: weatherData,
+    })
+  }
   const submitHandler = async e => {
     e.preventDefault()
+    console.log('location', location)
     const { latitude, longitude, placeName, shortName } = await getLocationData(
       location,
       null,
@@ -208,7 +218,7 @@ export default function Dashboard({ state, dispatch }) {
   const handleDrawerClose = () => {
     setOpen(false)
   }
-  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight)
+  // const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight)
 
   return (
     <div className={classes.root}>
@@ -268,9 +278,13 @@ export default function Dashboard({ state, dispatch }) {
           </IconButton>
         </div>
         <Divider />
-        <List>{mainListItems}</List>
+        <List>
+          <MainListItems setPage={setDisplayedPage} />
+        </List>
         <Divider />
-        <List>{secondaryListItems}</List>
+        <List>
+          <SecondaryListItems onClickHandler={onClickHandler} />
+        </List>
       </Drawer>
       {state.noWeatherData || state.weather.loading ? (
         <LinearProgress
@@ -281,40 +295,7 @@ export default function Dashboard({ state, dispatch }) {
         <main className={classes.content}>
           <div className={classes.appBarSpacer} />
           <Container maxWidth='lg' className={classes.container}>
-            <Grid container spacing={3}>
-              {/*  Map */}
-              <Grid item xs={12}>
-                <Map state={state} />
-              </Grid>
-
-              {/* CurrentTemp */}
-              <Grid item xs={12} md={4}>
-                <Paper className={fixedHeightPaper}>
-                  <CurrentTemp state={state} />
-                </Paper>
-              </Grid>
-
-              {/* Upcoming Week */}
-              <Grid item xs={12} md={8}>
-                <Paper className={fixedHeightPaper}>
-                  <UpcomingWeek state={state} />
-                </Paper>
-              </Grid>
-
-              {/* Right Now Table */}
-              <Grid item xs={12} md={4} lg={3}>
-                <Paper className={fixedHeightPaper}>
-                  <RightNowTable state={state} />
-                </Paper>
-              </Grid>
-
-              {/* Hourly Table */}
-              <Grid item xs={12} md={8} lg={9}>
-                <Paper className={fixedHeightPaper}>
-                  <Next24Chart state={state} />
-                </Paper>
-              </Grid>
-            </Grid>
+            {servePage(state, displayedPage)}
             <Box pt={4}>
               <Copyright />
             </Box>

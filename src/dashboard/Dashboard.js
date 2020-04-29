@@ -157,11 +157,15 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-export default function Dashboard({ state, dispatch }) {
+export default function Dashboard({
+  state,
+  dispatch,
+  displayedPage,
+  setDisplayedPage,
+}) {
   const classes = useStyles()
   const [open, setOpen] = useState(false)
   const [location, setLocation] = useState('')
-  const [displayedPage, setDisplayedPage] = useState('home')
   const [appBarTitle, setAppBarTitle] = useState('React Weather Dashboard')
 
   // This handler is used for the left menu drawer "Quick Links"
@@ -185,6 +189,7 @@ export default function Dashboard({ state, dispatch }) {
       type: 'SET_WEATHER',
       payload: weatherData,
     })
+    setDisplayedPage('home')
   }
 
   // This handler  us used for the AppBar search input.
@@ -212,6 +217,7 @@ export default function Dashboard({ state, dispatch }) {
       payload: weatherData,
     })
     setLocation('')
+    setDisplayedPage('home')
   }
 
   const handleDrawerOpen = () => {
@@ -223,7 +229,12 @@ export default function Dashboard({ state, dispatch }) {
 
   // This is mainly for weird queries, like a string of symbols. It will fire during fetch errors.
   if (state.error.isTrue) {
-    return <ErrorDialogue errorMessage={state.error.message} searchedTerm={location} />
+    return (
+      <ErrorDialogue
+        errorMessage={state.error.message}
+        searchedTerm={location}
+      />
+    )
   }
 
   return (
@@ -255,23 +266,26 @@ export default function Dashboard({ state, dispatch }) {
             {appBarTitle}
           </Typography>
 
-          <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
+          {/* Search will appear in Welcome page if geolocation position is initially denied. */}
+          {state.noWeatherData && state.deniedGeolocation ? null : (
+            <div className={classes.search}>
+              <div className={classes.searchIcon}>
+                <SearchIcon />
+              </div>
+              <form onSubmit={submitHandler}>
+                <InputBase
+                  placeholder='Search..'
+                  classes={{
+                    root: classes.inputRoot,
+                    input: classes.inputInput,
+                  }}
+                  inputProps={{ 'aria-label': 'search' }}
+                  value={location}
+                  onChange={e => setLocation(e.target.value)}
+                />
+              </form>
             </div>
-            <form onSubmit={submitHandler}>
-              <InputBase
-                placeholder='Enter Location..'
-                classes={{
-                  root: classes.inputRoot,
-                  input: classes.inputInput,
-                }}
-                inputProps={{ 'aria-label': 'search' }}
-                value={location}
-                onChange={e => setLocation(e.target.value)}
-              />
-            </form>
-          </div>
+          )}
         </Toolbar>
       </AppBar>
 
@@ -304,7 +318,7 @@ export default function Dashboard({ state, dispatch }) {
       </Drawer>
 
       {/* Progress bar is shown in the main area while fetching data */}
-      {state.noWeatherData || state.weather.loading ? (
+      {state.needsWelcomePage || state.weather.loading ? (
         <LinearProgress
           className={classes.linearProgressBar}
           color='secondary'
@@ -313,7 +327,13 @@ export default function Dashboard({ state, dispatch }) {
         <main className={classes.content}>
           <div className={classes.appBarSpacer} />
           <Container maxWidth='lg' className={classes.container}>
-            {servePage(state, displayedPage)}
+            {servePage(
+              state,
+              displayedPage,
+              location,
+              setLocation,
+              submitHandler
+            )}
             <Box pt={4}>
               <Copyright />
             </Box>

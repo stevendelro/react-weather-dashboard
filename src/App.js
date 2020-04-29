@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer } from 'react'
+import React, { useEffect, useState, useReducer } from 'react'
 import moment from 'moment'
 import { v4 as uuidv4 } from 'uuid'
 import Dashboard from './dashboard/Dashboard'
@@ -6,11 +6,13 @@ import Dashboard from './dashboard/Dashboard'
 import { getWeather, getPosition, getLocationData } from './util/index'
 
 const initialState = {
+  deniedGeolocation: false,
+  needsWelcomePage: true,
   error: {
     isTrue: false,
     mapBoxError: false,
     darkSkyError: false,
-    message: ''
+    message: '',
   },
   noWeatherData: true,
   noHistoryData: true,
@@ -26,13 +28,14 @@ const initialState = {
     latitude: '',
     longitude: '',
     timeSearched: '',
-    searchedTerm: ''
+    searchedTerm: '',
   },
   historyList: [],
 }
 
 function App() {
-  
+  const [displayedPage, setDisplayedPage] = useState('home')
+
   const reducer = (state, action) => {
     const now = moment()
     const getDate = now.format('L')
@@ -44,7 +47,7 @@ function App() {
         action.payload.daily.data.forEach(day => {
           day.weekday = moment.unix(day.time).format('ddd')
           day.date = moment.unix(day.time).format('M/D')
-          
+
           // Format Timestamp to extract sunrise/sunset time.
           day.sunrise = moment.unix(day.sunriseTime).format('h:mm')
           day.sunset = moment.unix(day.sunsetTime).format('h:mm')
@@ -53,9 +56,8 @@ function App() {
         action.payload.hourly.data.forEach(hour => {
           hour.thisHour = moment.unix(hour.time).format('ha')
           hour.tableHour = moment.unix(hour.time).format('h a')
-
         })
-        
+
         return {
           ...state,
           noWeatherData: false,
@@ -66,7 +68,7 @@ function App() {
               ...action.payload.currently,
               today: moment
                 .unix(action.payload.currently.time)
-                .format('dddd, MMMM Do')
+                .format('dddd, MMMM Do'),
             },
             hourly: { ...action.payload.hourly },
             daily: { ...action.payload.daily },
@@ -84,8 +86,18 @@ function App() {
             placeName: action.payload.placeName,
             latitude: action.payload.latitude,
             longitude: action.payload.longitude,
-            searchedTerm: action.payload.searchedTerm
+            searchedTerm: action.payload.searchedTerm,
           },
+        }
+      case 'USER_DENIED_GEOLOCATION':
+        return {
+          ...state,
+          deniedGeolocation: true,
+        }
+      case 'WELCOME_PAGE_DISPLAYED':
+        return {
+          ...state,
+          needsWelcomePage: false,
         }
       case 'ERROR_MAPBOX':
         return {
@@ -93,8 +105,9 @@ function App() {
           error: {
             isTrue: true,
             mapBoxError: true,
-            message: 'Whoops. There was an error retrieving that location! Lets try again.'
-          }
+            message:
+              'Whoops. There was an error retrieving that location! Lets try again.',
+          },
         }
       case 'ERROR_DARKSKY':
         return {
@@ -102,8 +115,9 @@ function App() {
           error: {
             isTrue: true,
             darkSkyError: true,
-            message: 'Welp. We ran into a problem getting weather for that location! Lets try again.'
-          }
+            message:
+              'Welp. We ran into a problem getting weather for that location! Lets try again.',
+          },
         }
       case 'LOG_LAST_CITY': {
         // Splicing the history list to keep the most recent 7 searches.
@@ -112,9 +126,7 @@ function App() {
             ...state,
             noHistoryData: false,
             historyList: [
-              ...state.historyList.splice(0,
-                state.historyList.length - 7
-              ),
+              ...state.historyList.splice(0, state.historyList.length - 7),
               {
                 key: uuidv4(),
                 location: action.payload.location,
@@ -148,13 +160,21 @@ function App() {
   // Retrieve browser geolocation on initial load.
   useEffect(() => {
     getPosition()
-      .then(({ coords }) => getWeather(coords.latitude, coords.longitude, dispatch))
+      .then(({ coords }) =>
+        getWeather(coords.latitude, coords.longitude, dispatch)
+      )
       .then(initialWeather => {
         dispatch({
           type: 'SET_WEATHER',
           payload: initialWeather,
         })
       })
+      .catch(rejected =>
+        dispatch({
+          type: 'USER_DENIED_GEOLOCATION',
+          payload: rejected,
+        })
+      )
   }, [])
 
   // Auto fetch the location name of the browser's Geolocation coordinates.
@@ -183,9 +203,22 @@ function App() {
     }
   }, [state.location.placeName])
 
+  // Handle rejected permission for geolocation positioning
+  if (state.deniedGeolocation && state.needsWelcomePage) {
+    setDisplayedPage('welcome')
+    dispatch({
+      type: 'WELCOME_PAGE_DISPLAYED',
+    })
+  }
+
   return (
     <div className='App'>
-      <Dashboard state={state} dispatch={dispatch}/>
+      <Dashboard
+        state={state}
+        dispatch={dispatch}
+        displayedPage={displayedPage}
+        setDisplayedPage={setDisplayedPage}
+      />
     </div>
   )
 }

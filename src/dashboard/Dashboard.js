@@ -30,9 +30,9 @@ import {
 function Copyright() {
   return (
     <Typography variant='body2' color='textSecondary' align='center'>
-      {'Copyright © '}
-      <Link color='inherit' href='https://material-ui.com/'>
-        Steven Del Rosario
+      {'Source Code @ '}
+      <Link color='inherit' href='https://github.com/stevendelro/react-weather-dashboard'>
+        github.com/stevendelro
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}

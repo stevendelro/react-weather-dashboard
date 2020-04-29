@@ -1,6 +1,6 @@
 # Unbrellapp - React hooks, Recharts, Material UI
 
-## [LIVE DEMO] [4]
+## [LIVE DEMO] (https://umbrellapp.now.sh) &rarr; https://umbrellapp.now.sh
 
 
 
@@ -8,9 +8,9 @@
 
 I built this project to teach myself how to use React hooks and to work on understanding how to create better UI. 
 
-* The UI was created with [Material-UI] [1]
-* The charts are made with [Recharts] [2]. 
-* The weather icons were created by [Lance Snider] [3].
+* The UI was created with [Material-UI] (https://material-ui.com/)
+* The charts are made with [Recharts] (https://https://recharts.org/en-US/). 
+* The weather icons were created by [Lance Snider] (https://codecanyon.net/user/dxc).
 
 
 ## Key Features
@@ -21,11 +21,11 @@ Upon launch, the app will ask for your permission to use your browser's geolocat
 
 ### Search, Map, Weather
 
-I used the [MapBox API] [5] to retrieve the coordinates of any search location. 
+I used the [MapBox API] (https://mapbox.com) to retrieve the coordinates of any search location. 
 
 A really cool byproduct of this is that MapBox handles misspelled words and finds the location of a place that most closely resembles what you might be looking for.
 
-Once MapBox gets the coordinate information, I send that info to the [Dark Sky API] [6] to retrieve weather info.
+Once MapBox gets the coordinate information, I send that info to the [Dark Sky API] (https://darksky.net) to retrieve weather info.
 
 ### Charts for better Data Visualization
 
@@ -37,11 +37,3 @@ I've barely scratched the surface with understanding and utilizing all the advan
 
 
 The UI is completely responsive and works across all screen sizes.
-
-
-[1]: https://material-ui.com/       "Material-UI"
-[2]: https://https://recharts.org/en-US/  "Recharts"
-[3]: https://codecanyon.net/user/dxc "Lance Snider"
-[4]: https://umbrellapp.now.sh "DEMO"
-[5]: https://mapbox.com "MapBox API"
-[6]: https://darksky.net "Dark Sky API"

@@ -21,6 +21,7 @@ import ErrorDialogue from './ErrorDialogue'
 import { MainListItems, SecondaryListItems } from './listItems'
 import servePage from './servePage'
 
+
 import {
   getLocationData,
   getWeather,
@@ -261,7 +262,7 @@ export default function Dashboard({ state, dispatch }) {
             </div>
             <form onSubmit={submitHandler}>
               <InputBase
-                placeholder='Enter Location..'
+                placeholder='Search..'
                 classes={{
                   root: classes.inputRoot,
                   input: classes.inputInput,

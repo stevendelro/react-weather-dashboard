@@ -11,7 +11,12 @@ export const getPosition = () => {
 }
 
 // Gets location data by location name or by latitude/longitude coordinates.
-export const getLocationData = async (location, latitude, longitude, dispatch) => {
+export const getLocationData = async (
+  location,
+  latitude,
+  longitude,
+  dispatch
+) => {
   let lat, long, placeName, mapBoxUrl
 
   if (!location) {
@@ -28,12 +33,11 @@ export const getLocationData = async (location, latitude, longitude, dispatch) =
       long = response.data.features[0].center[0]
       lat = response.data.features[0].center[1]
       placeName = response.data.features[0].place_name
-    
     })
     .catch(error => {
       console.error('ERROR DURING MAPBOX FETCH: ', error)
       dispatch({
-        type: 'ERROR_MAPBOX'
+        type: 'ERROR_MAPBOX',
       })
       throw Error
     })
@@ -59,7 +63,7 @@ export const getWeather = async (latitude, longitude, dispatch) => {
     .catch(error => {
       console.log('ERROR DURING DARKSKY FETCH: ', error)
       dispatch({
-        type: 'ERROR_DARKSKY'
+        type: 'ERROR_DARKSKY',
       })
       throw Error
     })
@@ -74,14 +78,14 @@ export function getCardinalDirection(angle) {
   if (typeof angle === 'string') angle = parseInt(angle)
   if (angle <= 0 || angle > 360 || typeof angle === 'undefined') return '☈' //lol
   const arrows = {
-    north: '↑',
-    north_east: '↗',
-    east: '→',
-    south_east: '↘',
-    south: '↓',
-    south_west: '↙',
-    west: '←',
-    north_west: '↖',
+    north: 'N ',
+    north_east: 'NE ',
+    east: 'E ',
+    south_east: 'SE ',
+    south: 'S ',
+    south_west: 'SW ',
+    west: 'W ',
+    north_west: 'NW ',
   }
   const directions = Object.keys(arrows)
   const degree = 360 / directions.length

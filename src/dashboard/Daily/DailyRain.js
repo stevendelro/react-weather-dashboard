@@ -18,7 +18,7 @@ export default function DailyRain({ state }) {
         ...prev,
         {
           weekday: day.weekday,
-          rain: Number((day.precipProbability * 100)),
+          rain: Number(day.precipProbability * 100),
         },
       ])
     })

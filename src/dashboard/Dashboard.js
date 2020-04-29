@@ -164,6 +164,7 @@ export default function Dashboard({ state, dispatch }) {
   const [displayedPage, setDisplayedPage] = useState('home')
   const [appBarTitle, setAppBarTitle] = useState('React Weather Dashboard')
 
+  // This handler is used for the left menu drawer "Quick Links"
   const onClickHandler = async location => {
     const { latitude, longitude, placeName } = await getLocationData(
       location,
@@ -185,6 +186,8 @@ export default function Dashboard({ state, dispatch }) {
       payload: weatherData,
     })
   }
+
+  // This handler  us used for the AppBar search input.
   const submitHandler = async e => {
     e.preventDefault()
     console.log('location', location)
@@ -218,6 +221,7 @@ export default function Dashboard({ state, dispatch }) {
     setOpen(false)
   }
 
+  // This is mainly for weird queries, like a string of symbols. It will fire during fetch errors.
   if (state.error.isTrue) {
     return <ErrorDialogue errorMessage={state.error.message} searchedTerm={location} />
   }
@@ -225,6 +229,8 @@ export default function Dashboard({ state, dispatch }) {
   return (
     <div className={classes.root}>
       <CssBaseline />
+
+      {/* AppBar */}
       <AppBar
         position='absolute'
         className={clsx(classes.appBar, open && classes.appBarShift)}>
@@ -268,6 +274,8 @@ export default function Dashboard({ state, dispatch }) {
           </div>
         </Toolbar>
       </AppBar>
+
+      {/* Left Menu */}
       <Drawer
         variant='permanent'
         classes={{
@@ -294,6 +302,8 @@ export default function Dashboard({ state, dispatch }) {
           />
         </List>
       </Drawer>
+
+      {/* Progress bar is shown in the main area while fetching data */}
       {state.noWeatherData || state.weather.loading ? (
         <LinearProgress
           className={classes.linearProgressBar}

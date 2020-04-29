@@ -69,9 +69,7 @@ export const MainListItems = ({ setPage, setAppBarTitle }) => {
   )
 }
 
-export const SecondaryListItems = ({
-  onClickHandler
-}) => {
+export const SecondaryListItems = ({ onClickHandler }) => {
   return (
     <div>
       <ListSubheader inset>Quick Links</ListSubheader>

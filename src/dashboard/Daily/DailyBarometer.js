@@ -39,7 +39,12 @@ export default function DailyBarometer({ state }) {
             bottom: 0,
           }}>
           <defs>
-            <linearGradient id='dailyBarometerGradient' x1='0' y1='0' x2='0' y2='1'>
+            <linearGradient
+              id='dailyBarometerGradient'
+              x1='0'
+              y1='0'
+              x2='0'
+              y2='1'>
               <stop offset='1%' stopColor='#2D882D' stopOpacity={0.8} />
               <stop offset='99%' stopColor='#2D882D' stopOpacity={0} />
             </linearGradient>

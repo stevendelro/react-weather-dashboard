@@ -18,7 +18,7 @@ export default function HourRain({ state }) {
         ...prev,
         {
           time: hour.thisHour,
-          rain: Number((hour.precipProbability * 100)),
+          rain: Number(hour.precipProbability * 100),
         },
       ])
     })

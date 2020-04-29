@@ -39,7 +39,12 @@ export default function DailyHumidity({ state }) {
             bottom: 0,
           }}>
           <defs>
-            <linearGradient id='dailyHumidityGradient' x1='0' y1='0' x2='0' y2='1'>
+            <linearGradient
+              id='dailyHumidityGradient'
+              x1='0'
+              y1='0'
+              x2='0'
+              y2='1'>
               <stop offset='1%' stopColor='#A071A8' stopOpacity={0.8} />
               <stop offset='99%' stopColor='#A071A8' stopOpacity={0} />
             </linearGradient>

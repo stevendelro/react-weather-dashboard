@@ -19,7 +19,7 @@ export default function HourTemp({ state }) {
         ...prev,
         {
           time: hour.thisHour,
-          temp: hour.apparentTemperature.toFixed(0)
+          temp: hour.apparentTemperature.toFixed(0),
         },
       ])
     })
@@ -40,24 +40,13 @@ export default function HourTemp({ state }) {
           }}>
           <defs>
             <linearGradient id='tempGradient' x1='0' y1='0' x2='0' y2='1'>
-              <stop
-                offset='1%'
-                stopColor='#FFB784'
-                stopOpacity={0.8}
-              />
-              <stop
-                offset='99%'
-                stopColor='#FFB784'
-                stopOpacity={0}
-              />
+              <stop offset='1%' stopColor='#FFB784' stopOpacity={0.8} />
+              <stop offset='99%' stopColor='#FFB784' stopOpacity={0} />
             </linearGradient>
           </defs>
           <CartesianGrid strokeDasharray='3 3' />
-          <XAxis dataKey='time'/>
-          <YAxis
-            unit='°F'
-            domain={['dataMin - 5', 'dataMax + 5']}
-          />
+          <XAxis dataKey='time' />
+          <YAxis unit='°F' domain={['dataMin - 5', 'dataMax + 5']} />
           <Tooltip />
           <Area
             type='monotone'

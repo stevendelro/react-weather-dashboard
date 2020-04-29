@@ -72,7 +72,7 @@ export function capitalizeFirstLetter(str) {
 
 export function getCardinalDirection(angle) {
   if (typeof angle === 'string') angle = parseInt(angle)
-  if (angle <= 0 || angle > 360 || typeof angle === 'undefined') return '☈'
+  if (angle <= 0 || angle > 360 || typeof angle === 'undefined') return '☈' //lol
   const arrows = {
     north: '↑',
     north_east: '↗',

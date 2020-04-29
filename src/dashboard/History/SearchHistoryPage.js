@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     overflow: 'auto',
     flexDirection: 'column',
-    marginBottom: theme.spacing(2)
+    marginBottom: theme.spacing(2),
   },
   container: {
     paddingTop: theme.spacing(4),
@@ -32,31 +32,32 @@ export default function SearchHistoryPage({ state }) {
     <Grid container spacing={3}>
       <Grid item xs={12}>
         <List>
-          {historyList.map(listItem => (
-            <Paper key={uuidv4()} className={classes.paper}>
-              <ListItem>
-                <ListItemIcon>
-                  <PinDropIcon />
-                </ListItemIcon>
-                <ListItemText
-                  primary={listItem.location}
-                  secondary={
-                    <>
-                      <Typography
-                        component='span'
-                        variant='body2'
-                        className={classes.inline}
-                        color='textPrimary'>
-                        {listItem.timeSearched}
-                      </Typography>
-                      
-                    </>
-                  }
-                />
-                <Divider />
-              </ListItem>
-            </Paper>
-          )).reverse()}
+          {historyList
+            .map(listItem => (
+              <Paper key={uuidv4()} className={classes.paper}>
+                <ListItem>
+                  <ListItemIcon>
+                    <PinDropIcon />
+                  </ListItemIcon>
+                  <ListItemText
+                    primary={listItem.location}
+                    secondary={
+                      <>
+                        <Typography
+                          component='span'
+                          variant='body2'
+                          className={classes.inline}
+                          color='textPrimary'>
+                          {listItem.timeSearched}
+                        </Typography>
+                      </>
+                    }
+                  />
+                  <Divider />
+                </ListItem>
+              </Paper>
+            ))
+            .reverse()}
         </List>
       </Grid>
     </Grid>

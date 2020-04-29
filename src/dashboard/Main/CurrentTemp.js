@@ -8,7 +8,7 @@ import serveIcon from '../../icons/index'
 const useStyles = makeStyles({
   iconBox: {
     width: '155px',
-  }
+  },
 })
 
 export default function CurrentTemp({ state }) {
@@ -25,10 +25,7 @@ export default function CurrentTemp({ state }) {
         <Typography align='center' component='p' variant='h2'>
           {Number(state.weather.currently.temperature).toFixed(0)}°F
         </Typography>
-        <Typography
-          align='center'
-          color='textSecondary'
-          gutterBottom>
+        <Typography align='center' color='textSecondary' gutterBottom>
           {state.weather.hourly.summary}
         </Typography>
       </Grid>

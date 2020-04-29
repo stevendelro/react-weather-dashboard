@@ -3,6 +3,7 @@ import HomePage from './Main/HomePage'
 import DailyPage from './Daily/DailyPage'
 import HourlyPage from './Hourly/HourlyPage'
 import NotFoundPage from './NotFoundPage'
+import SearchHistoryPage from './History/SearchHistoryPage'
 
 const servePage = (state, pageName) => {
   switch (pageName) {
@@ -14,6 +15,9 @@ const servePage = (state, pageName) => {
 
     case 'hourly':
       return <HourlyPage state={state} />
+
+    case 'history':
+      return<SearchHistoryPage state={state} />
 
     default:
       return <NotFoundPage />

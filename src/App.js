@@ -23,7 +23,6 @@ const initialState = {
   },
   location: {
     placeName: '',
-    shortName: '',
     latitude: '',
     longitude: '',
     timeSearched: '',
@@ -85,7 +84,6 @@ function App() {
             placeName: action.payload.placeName,
             latitude: action.payload.latitude,
             longitude: action.payload.longitude,
-            shortName: action.payload.shortName,
             searchedTerm: action.payload.searchedTerm
           },
         }
@@ -114,9 +112,8 @@ function App() {
             ...state,
             noHistoryData: false,
             historyList: [
-              ...state.historyList.splice(
-                state.historyList.length - 7,
-                state.historyList.length
+              ...state.historyList.splice(0,
+                state.historyList.length - 7
               ),
               {
                 key: uuidv4(),

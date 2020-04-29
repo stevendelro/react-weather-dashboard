@@ -165,7 +165,7 @@ export default function Dashboard({ state, dispatch }) {
   const [appBarTitle, setAppBarTitle] = useState('React Weather Dashboard')
 
   const onClickHandler = async location => {
-    const { latitude, longitude, placeName, shortName } = await getLocationData(
+    const { latitude, longitude, placeName } = await getLocationData(
       location,
       null,
       null
@@ -176,7 +176,6 @@ export default function Dashboard({ state, dispatch }) {
         placeName,
         latitude,
         longitude,
-        shortName,
         searchedTerm: capitalizeFirstLetter(location),
       },
     })
@@ -189,7 +188,7 @@ export default function Dashboard({ state, dispatch }) {
   const submitHandler = async e => {
     e.preventDefault()
     console.log('location', location)
-    const { latitude, longitude, placeName, shortName } = await getLocationData(
+    const { latitude, longitude, placeName } = await getLocationData(
       location,
       null,
       null,
@@ -201,7 +200,6 @@ export default function Dashboard({ state, dispatch }) {
         placeName,
         latitude,
         longitude,
-        shortName,
         searchedTerm: capitalizeFirstLetter(location),
       },
     })

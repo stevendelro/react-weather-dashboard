@@ -11,6 +11,7 @@ import ExpansionPanel from '@material-ui/core/ExpansionPanel'
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
+import TableContainer from '@material-ui/core/TableContainer'
 import Title from '../Title'
 
 export default function DailyTable({ state }) {
@@ -67,48 +68,50 @@ export default function DailyTable({ state }) {
           </Grid>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
-          <Table>
-            <TableBody>
-              <TableRow>
-                <TableCell align='left'>Day</TableCell>
-                <TableCell align='center'>Date</TableCell>
-                <TableCell align='center'>Weather</TableCell>
-                <TableCell align='center'>(°F) High</TableCell>
-                <TableCell align='center'>(°F) Low</TableCell>
-                <TableCell align='center'>UV Index</TableCell>
-                <TableCell align='center'>(%) Humidity</TableCell>
-                <TableCell align='center'>(mi) Visibility</TableCell>
-                <TableCell align='center'>(in) Pressure</TableCell>
-                <TableCell align='center'>(mph) Wind</TableCell>
-                <TableCell align='right' size='small'>
-                  (%) Clouds
-                </TableCell>
-                <TableCell align='center'>Sunrise</TableCell>
-                <TableCell align='center'>Sunset</TableCell>
-              </TableRow>
-              {chartData.map(day => (
-                <TableRow hover={true} key={uuidv4()}>
-                  <TableCell align='left'>
-                    {day.weekday.toUpperCase()}
-                  </TableCell>
-                  <TableCell align='center'>{day.date}</TableCell>
-                  <TableCell align='center'>{serveIcon(day.icon)}</TableCell>
-                  <TableCell align='center'>{day.hi}</TableCell>
-                  <TableCell align='center'>{day.lo}</TableCell>
-                  <TableCell align='center'>{day.uv}</TableCell>
-                  <TableCell align='center'>{day.humidity}</TableCell>
-                  <TableCell align='center'>{day.visibility}</TableCell>
-                  <TableCell align='center'>{day.pressure}</TableCell>
-                  <TableCell align='center'>{day.wind}</TableCell>
+          <TableContainer>
+            <Table>
+              <TableBody>
+                <TableRow>
+                  <TableCell align='left'>Day</TableCell>
+                  <TableCell align='center'>Date</TableCell>
+                  <TableCell align='center'>Weather</TableCell>
+                  <TableCell align='center'>(°F) High</TableCell>
+                  <TableCell align='center'>(°F) Low</TableCell>
+                  <TableCell align='center'>UV Index</TableCell>
+                  <TableCell align='center'>(%) Humidity</TableCell>
+                  <TableCell align='center'>(mi) Visibility</TableCell>
+                  <TableCell align='center'>(in) Pressure</TableCell>
+                  <TableCell align='center'>(mph) Wind</TableCell>
                   <TableCell align='right' size='small'>
-                    {day.cloudCover}
+                    (%) Clouds
                   </TableCell>
-                  <TableCell align='center'>{day.sunrise}</TableCell>
-                  <TableCell align='center'>{day.sunset}</TableCell>
+                  <TableCell align='center'>Sunrise</TableCell>
+                  <TableCell align='center'>Sunset</TableCell>
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
+                {chartData.map(day => (
+                  <TableRow hover={true} key={uuidv4()}>
+                    <TableCell align='left'>
+                      {day.weekday.toUpperCase()}
+                    </TableCell>
+                    <TableCell align='center'>{day.date}</TableCell>
+                    <TableCell align='center'>{serveIcon(day.icon)}</TableCell>
+                    <TableCell align='center'>{day.hi}</TableCell>
+                    <TableCell align='center'>{day.lo}</TableCell>
+                    <TableCell align='center'>{day.uv}</TableCell>
+                    <TableCell align='center'>{day.humidity}</TableCell>
+                    <TableCell align='center'>{day.visibility}</TableCell>
+                    <TableCell align='center'>{day.pressure}</TableCell>
+                    <TableCell align='center'>{day.wind}</TableCell>
+                    <TableCell align='right' size='small'>
+                      {day.cloudCover}
+                    </TableCell>
+                    <TableCell align='center'>{day.sunrise}</TableCell>
+                    <TableCell align='center'>{day.sunset}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
         </ExpansionPanelDetails>
       </ExpansionPanel>
     </>

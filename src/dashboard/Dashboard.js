@@ -40,7 +40,7 @@ function Copyright() {
   )
 }
 
-const drawerWidth = 240
+const drawerWidth = 195
 
 const useStyles = makeStyles(theme => ({
   root: {

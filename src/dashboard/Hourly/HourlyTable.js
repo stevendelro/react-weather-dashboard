@@ -10,6 +10,7 @@ import ExpansionPanel from '@material-ui/core/ExpansionPanel'
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
+import TableContainer from '@material-ui/core/TableContainer'
 import Title from '../Title'
 
 export default function HourlyTable({ state }) {
@@ -57,82 +58,84 @@ export default function HourlyTable({ state }) {
           </Grid>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
-          <Table>
-            <TableBody>
-              <TableRow variant='head'>
-                <TableCell size='small' align='left'>
-                  Time
-                </TableCell>
-                <TableCell size='small' align='center'>
-                  Weather
-                </TableCell>
-                <TableCell size='small' align='center'>
-                  (°F) Temp
-                </TableCell>
-                <TableCell size='small' align='center'>
-                  (%) Rain
-                </TableCell>
-                <TableCell size='small' align='center'>
-                  UV Index
-                </TableCell>
-                <TableCell size='small' align='center'>
-                  (%) Humidity
-                </TableCell>
-                <TableCell size='small' align='center'>
-                  (mi) Visibility
-                </TableCell>
-                <TableCell size='small' align='center'>
-                  (in) Pressure
-                </TableCell>
-                <TableCell size='small' align='center'>
-                  (mph) Wind
-                </TableCell>
-                <TableCell size='small' align='center'>
-                  (mph) Gusts
-                </TableCell>
-                <TableCell size='small' align='center'>
-                  (%) Clouds
-                </TableCell>
-              </TableRow>
-              {chartData.map(hour => (
-                <TableRow hover={true} key={uuidv4()}>
-                  <TableCell size='small' padding='none' align='center'>
-                    {hour.hour}
-                  </TableCell>
-                  <TableCell size='small' padding='none'>
-                    {hour.summary}
+          <TableContainer>
+            <Table>
+              <TableBody>
+                <TableRow variant='head'>
+                  <TableCell size='small' align='left'>
+                    Time
                   </TableCell>
                   <TableCell size='small' align='center'>
-                    {hour.temp}
+                    Weather
                   </TableCell>
                   <TableCell size='small' align='center'>
-                    {hour.rain}
+                    (°F) Temp
                   </TableCell>
                   <TableCell size='small' align='center'>
-                    {hour.uv}
+                    (%) Rain
                   </TableCell>
                   <TableCell size='small' align='center'>
-                    {hour.humidity}
+                    UV Index
                   </TableCell>
                   <TableCell size='small' align='center'>
-                    {hour.visibility}
+                    (%) Humidity
                   </TableCell>
                   <TableCell size='small' align='center'>
-                    {hour.pressure}
+                    (mi) Visibility
                   </TableCell>
                   <TableCell size='small' align='center'>
-                    {hour.wind}
+                    (in) Pressure
                   </TableCell>
                   <TableCell size='small' align='center'>
-                    {hour.windGusts}
+                    (mph) Wind
                   </TableCell>
                   <TableCell size='small' align='center'>
-                    {hour.cloudCover}
+                    (mph) Gusts
+                  </TableCell>
+                  <TableCell size='small' align='center'>
+                    (%) Clouds
                   </TableCell>
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
+                {chartData.map(hour => (
+                  <TableRow hover={true} key={uuidv4()}>
+                    <TableCell size='small' padding='none' align='center'>
+                      {hour.hour}
+                    </TableCell>
+                    <TableCell size='small' padding='none'>
+                      {hour.summary}
+                    </TableCell>
+                    <TableCell size='small' align='center'>
+                      {hour.temp}
+                    </TableCell>
+                    <TableCell size='small' align='center'>
+                      {hour.rain}
+                    </TableCell>
+                    <TableCell size='small' align='center'>
+                      {hour.uv}
+                    </TableCell>
+                    <TableCell size='small' align='center'>
+                      {hour.humidity}
+                    </TableCell>
+                    <TableCell size='small' align='center'>
+                      {hour.visibility}
+                    </TableCell>
+                    <TableCell size='small' align='center'>
+                      {hour.pressure}
+                    </TableCell>
+                    <TableCell size='small' align='center'>
+                      {hour.wind}
+                    </TableCell>
+                    <TableCell size='small' align='center'>
+                      {hour.windGusts}
+                    </TableCell>
+                    <TableCell size='small' align='center'>
+                      {hour.cloudCover}
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
         </ExpansionPanelDetails>
       </ExpansionPanel>
     </>

@@ -188,6 +188,8 @@ function App() {
           type: 'SET_LOCATION',
           payload: locationData,
         })
+      }).catch( error => {
+        console.log('You denied auto-fetching the weather based on your browser\'s geolocation. Check your browser settings to reset and allow this feature.')
       })
   }, [])
 

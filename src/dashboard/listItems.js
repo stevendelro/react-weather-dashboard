@@ -14,10 +14,12 @@ import EuroIcon from '@material-ui/icons/Euro'
 import TranslateIcon from '@material-ui/icons/Translate'
 import AcUnitIcon from '@material-ui/icons/AcUnit'
 import GitHubIcon from '@material-ui/icons/GitHub'
-import Typography from '@material-ui/core/Typography'
-import Link from '@material-ui/core/Link'
 
-export const MainListItems = ({ setPage, setAppBarTitle }) => {
+export const MainListItems = ({
+  setPage,
+  setAppBarTitle,
+  closeDrawer,
+}) => {
   return (
     <div>
       <ListItem>
@@ -27,6 +29,7 @@ export const MainListItems = ({ setPage, setAppBarTitle }) => {
       <ListItem
         button
         onClick={() => {
+          closeDrawer()
           setPage('home')
           setAppBarTitle('React Weather Dashboard')
         }}>
@@ -38,6 +41,7 @@ export const MainListItems = ({ setPage, setAppBarTitle }) => {
       <ListItem
         button
         onClick={() => {
+          closeDrawer()
           setPage('hourly')
           setAppBarTitle('Hourly Weather')
         }}>
@@ -49,6 +53,7 @@ export const MainListItems = ({ setPage, setAppBarTitle }) => {
       <ListItem
         button
         onClick={() => {
+          closeDrawer()
           setPage('daily')
           setAppBarTitle('Daily Weather')
         }}>
@@ -60,6 +65,7 @@ export const MainListItems = ({ setPage, setAppBarTitle }) => {
       <ListItem
         button
         onClick={() => {
+          closeDrawer()
           setPage('history')
           setAppBarTitle('Search History')
         }}>
@@ -83,41 +89,71 @@ export const MainListItems = ({ setPage, setAppBarTitle }) => {
   )
 }
 
-export const SecondaryListItems = ({ onClickHandler }) => {
+export const SecondaryListItems = ({ onClickHandler, closeDrawer }) => {
   return (
     <div>
       <ListSubheader inset>Quick Links</ListSubheader>
-      <ListItem button onClick={() => onClickHandler('Los Angeles')}>
+      <ListItem
+        button
+        onClick={() => {
+          closeDrawer()
+          onClickHandler('Los Angeles')
+        }}>
         <ListItemIcon>
           <MovieFilterIcon />
         </ListItemIcon>
         <ListItemText primary='Los Angeles' />
       </ListItem>
-      <ListItem button onClick={() => onClickHandler('New York')}>
+      <ListItem
+        button
+        onClick={() => {
+          closeDrawer()
+          onClickHandler('New York')
+        }}>
         <ListItemIcon>
           <LocationCityIcon />
         </ListItemIcon>
         <ListItemText primary='New York' />
       </ListItem>
-      <ListItem button onClick={() => onClickHandler('Tokyo')}>
+      <ListItem
+        button
+        onClick={() => {
+          closeDrawer()
+          onClickHandler('Tokyo')
+        }}>
         <ListItemIcon>
           <AirportShuttleIcon />
         </ListItemIcon>
         <ListItemText primary='Tokyo' />
       </ListItem>
-      <ListItem button onClick={() => onClickHandler('London')}>
+      <ListItem
+        button
+        onClick={() => {
+          closeDrawer()
+          onClickHandler('London')
+        }}>
         <ListItemIcon>
           <EuroIcon />
         </ListItemIcon>
         <ListItemText primary='London' />
       </ListItem>
-      <ListItem button onClick={() => onClickHandler('Moscow')}>
+      <ListItem
+        button
+        onClick={() => {
+          closeDrawer()
+          onClickHandler('Moscow')
+        }}>
         <ListItemIcon>
           <AcUnitIcon />
         </ListItemIcon>
         <ListItemText primary='Moscow' />
       </ListItem>
-      <ListItem button onClick={() => onClickHandler('Beijing')}>
+      <ListItem
+        button
+        onClick={() => {
+          closeDrawer()
+          onClickHandler('Beijing')
+        }}>
         <ListItemIcon>
           <TranslateIcon />
         </ListItemIcon>

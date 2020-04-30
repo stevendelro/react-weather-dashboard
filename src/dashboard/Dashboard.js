@@ -304,6 +304,7 @@ export default function Dashboard({
           <MainListItems
             setPage={setDisplayedPage}
             setAppBarTitle={setAppBarTitle}
+            closeDrawer={handleDrawerClose}
           />
         </List>
         <Divider />
@@ -311,6 +312,7 @@ export default function Dashboard({
           <SecondaryListItems
             onClickHandler={onClickHandler}
             setAppBarTitle={setAppBarTitle}
+            closeDrawer={handleDrawerClose}
           />
         </List>
       </Drawer>

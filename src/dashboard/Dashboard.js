@@ -27,19 +27,18 @@ import {
   capitalizeFirstLetter,
 } from '../util/index'
 
-function Copyright() {
+function Copyleft() {
   return (
     <Typography variant='body2' color='textSecondary' align='center'>
-      {'Source Code @ '}
-      <Link color='inherit' href='https://github.com/stevendelro/react-weather-dashboard'>
-        github.com/stevendelro
+      {'Copyleft © '}
+      <Link color='inherit' href='https://github.com/stevendelro'>
+        Steven Del Rosario
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
     </Typography>
   )
 }
-
 const drawerWidth = 195
 
 const useStyles = makeStyles(theme => ({
@@ -334,7 +333,7 @@ export default function Dashboard({
               submitHandler
             )}
             <Box pt={4}>
-              <Copyright />
+              <Copyleft />
             </Box>
           </Container>
         </main>

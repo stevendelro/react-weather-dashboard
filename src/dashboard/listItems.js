@@ -13,6 +13,9 @@ import AirportShuttleIcon from '@material-ui/icons/AirportShuttle'
 import EuroIcon from '@material-ui/icons/Euro'
 import TranslateIcon from '@material-ui/icons/Translate'
 import AcUnitIcon from '@material-ui/icons/AcUnit'
+import GitHubIcon from '@material-ui/icons/GitHub'
+import Typography from '@material-ui/core/Typography'
+import Link from '@material-ui/core/Link'
 
 export const MainListItems = ({ setPage, setAppBarTitle }) => {
   return (
@@ -64,6 +67,17 @@ export const MainListItems = ({ setPage, setAppBarTitle }) => {
           <HistoryIcon />
         </ListItemIcon>
         <ListItemText primary='Search History' />
+      </ListItem>
+      <ListItem
+        button
+        onClick={() =>
+          (window.location.href =
+            'https://github.com/stevendelro/react-weather-dashboard')
+        }>
+        <ListItemIcon>
+          <GitHubIcon />
+        </ListItemIcon>
+        <ListItemText primary='Source Code' />
       </ListItem>
     </div>
   )

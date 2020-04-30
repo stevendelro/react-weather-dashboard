@@ -42,7 +42,7 @@ export default function HourRain({ state }) {
           <Bar
             dataKey='rain'
             name='High'
-            fill='#6422A4'
+            fill='#6886c5'
             unit='%'
             barSize={20}
           />

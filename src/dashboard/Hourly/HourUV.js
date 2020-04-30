@@ -18,7 +18,7 @@ export default function HourUV({ state }) {
         ...prev,
         {
           time: hour.thisHour,
-          uv: hour.uvIndex,
+          uv: Number(hour.uvIndex),
         },
       ])
     })

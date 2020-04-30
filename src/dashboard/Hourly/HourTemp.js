@@ -40,8 +40,8 @@ export default function HourTemp({ state }) {
           }}>
           <defs>
             <linearGradient id='tempGradient' x1='0' y1='0' x2='0' y2='1'>
-              <stop offset='1%' stopColor='#FFB784' stopOpacity={0.8} />
-              <stop offset='99%' stopColor='#FFB784' stopOpacity={0} />
+              <stop offset='1%' stopColor='#FFE499' stopOpacity={0.8} />
+              <stop offset='99%' stopColor='#FFE499' stopOpacity={0} />
             </linearGradient>
           </defs>
           <CartesianGrid strokeDasharray='3 3' />
@@ -51,7 +51,7 @@ export default function HourTemp({ state }) {
           <Area
             type='monotone'
             dataKey='temp'
-            stroke='#D4722C'
+            stroke='#FFBC00'
             fill='url(#tempGradient)'
           />
         </AreaChart>

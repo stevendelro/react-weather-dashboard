@@ -42,7 +42,7 @@ export default function DailyRain({ state }) {
           <Bar
             dataKey='rain'
             name='High'
-            fill='#49001C'
+            fill='#6886c5'
             unit='%'
             barSize={20}
           />

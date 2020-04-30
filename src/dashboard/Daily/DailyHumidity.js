@@ -45,8 +45,8 @@ export default function DailyHumidity({ state }) {
               y1='0'
               x2='0'
               y2='1'>
-              <stop offset='1%' stopColor='#A071A8' stopOpacity={0.8} />
-              <stop offset='99%' stopColor='#A071A8' stopOpacity={0} />
+              <stop offset='1%' stopColor='#766CC8' stopOpacity={0.8} />
+              <stop offset='99%' stopColor='#766CC8' stopOpacity={0} />
             </linearGradient>
           </defs>
           <CartesianGrid strokeDasharray='3 3' />
@@ -56,7 +56,7 @@ export default function DailyHumidity({ state }) {
           <Area
             type='monotone'
             dataKey='humidity'
-            stroke='#652770'
+            stroke='#392CA9'
             fill='url(#dailyHumidityGradient)'
           />
         </AreaChart>

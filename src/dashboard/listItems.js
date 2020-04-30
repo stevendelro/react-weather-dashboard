@@ -16,9 +16,11 @@ import AcUnitIcon from '@material-ui/icons/AcUnit'
 import GitHubIcon from '@material-ui/icons/GitHub'
 
 export const MainListItems = ({
-  setPage,
+  setDisplayedPage,
   setAppBarTitle,
   closeDrawer,
+  noWeatherData,
+  dispatch,
 }) => {
   return (
     <div>
@@ -29,9 +31,17 @@ export const MainListItems = ({
       <ListItem
         button
         onClick={() => {
-          closeDrawer()
-          setPage('home')
-          setAppBarTitle('React Weather Dashboard')
+          if (noWeatherData) {
+            closeDrawer()
+            setDisplayedPage('welcome')
+            dispatch({
+              type: 'WELCOME_PAGE_DISPLAYED',
+            })
+          } else {
+            closeDrawer()
+            setDisplayedPage('home')
+            setAppBarTitle('React Weather Dashboard')
+          }
         }}>
         <ListItemIcon>
           <LocationOnIcon />
@@ -41,9 +51,17 @@ export const MainListItems = ({
       <ListItem
         button
         onClick={() => {
-          closeDrawer()
-          setPage('hourly')
-          setAppBarTitle('Hourly Weather')
+          if (noWeatherData) {
+            closeDrawer()
+            setDisplayedPage('welcome')
+            dispatch({
+              type: 'WELCOME_PAGE_DISPLAYED',
+            })
+          } else {
+            closeDrawer()
+            setDisplayedPage('hourly')
+            setAppBarTitle('Hourly Weather')
+          }
         }}>
         <ListItemIcon>
           <QueryBuilderIcon />
@@ -53,9 +71,17 @@ export const MainListItems = ({
       <ListItem
         button
         onClick={() => {
-          closeDrawer()
-          setPage('daily')
-          setAppBarTitle('Daily Weather')
+          if (noWeatherData) {
+            closeDrawer()
+            setDisplayedPage('welcome')
+            dispatch({
+              type: 'WELCOME_PAGE_DISPLAYED',
+            })
+          } else {
+            closeDrawer()
+            setDisplayedPage('daily')
+            setAppBarTitle('Daily Weather')
+          }
         }}>
         <ListItemIcon>
           <DateRangeIcon />
@@ -65,9 +91,17 @@ export const MainListItems = ({
       <ListItem
         button
         onClick={() => {
-          closeDrawer()
-          setPage('history')
-          setAppBarTitle('Search History')
+          if (noWeatherData) {
+            closeDrawer()
+            setDisplayedPage('welcome')
+            dispatch({
+              type: 'WELCOME_PAGE_DISPLAYED',
+            })
+          } else {
+            closeDrawer()
+            setDisplayedPage('history')
+            setAppBarTitle('Search History')
+          }
         }}>
         <ListItemIcon>
           <HistoryIcon />

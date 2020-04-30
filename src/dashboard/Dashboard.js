@@ -302,9 +302,11 @@ export default function Dashboard({
         <Divider />
         <List>
           <MainListItems
-            setPage={setDisplayedPage}
+            setDisplayedPage={setDisplayedPage}
             setAppBarTitle={setAppBarTitle}
             closeDrawer={handleDrawerClose}
+            noWeatherData={state.noWeatherData}
+            dispatch={dispatch}
           />
         </List>
         <Divider />

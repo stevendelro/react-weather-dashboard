@@ -19,7 +19,7 @@ export default function HourHumidity({ state }) {
         ...prev,
         {
           time: hour.thisHour,
-          humidity: (hour.humidity * 100).toFixed(0),
+          humidity: Number((hour.humidity * 100).toFixed(0)),
         },
       ])
     })

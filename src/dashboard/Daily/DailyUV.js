@@ -18,7 +18,7 @@ export default function DailyUV({ state }) {
         ...prev,
         {
           weekday: day.weekday,
-          uv: day.uvIndex,
+          uv: Number(day.uvIndex),
         },
       ])
     })

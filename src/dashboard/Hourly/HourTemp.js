@@ -19,7 +19,7 @@ export default function HourTemp({ state }) {
         ...prev,
         {
           time: hour.thisHour,
-          temp: hour.apparentTemperature.toFixed(0),
+          temp: Number(hour.apparentTemperature.toFixed(0)),
         },
       ])
     })

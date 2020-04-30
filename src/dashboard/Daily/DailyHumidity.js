@@ -19,7 +19,7 @@ export default function DailyHumidity({ state }) {
         ...prev,
         {
           weekday: day.weekday,
-          humidity: (day.humidity * 100).toFixed(0),
+          humidity: Number((day.humidity * 100).toFixed(0)),
         },
       ])
     })

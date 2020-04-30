@@ -19,7 +19,7 @@ export default function HourBarometer({ state }) {
         ...prev,
         {
           time: hour.thisHour,
-          pressure: (hour.pressure * 0.0295301).toFixed(2),
+          pressure: Number((hour.pressure * 0.0295301).toFixed(2)),
         },
       ])
     })

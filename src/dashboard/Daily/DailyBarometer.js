@@ -19,7 +19,7 @@ export default function DailyBarometer({ state }) {
         ...prev,
         {
           weekday: day.weekday,
-          pressure: (day.pressure * 0.0295301).toFixed(2),
+          pressure: Number((day.pressure * 0.0295301).toFixed(2)),
         },
       ])
     })

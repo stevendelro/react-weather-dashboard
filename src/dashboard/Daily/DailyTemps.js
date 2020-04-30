@@ -19,8 +19,8 @@ export default function DailyTemps({ state }) {
         ...prev,
         {
           weekday: day.weekday,
-          High: day.apparentTemperatureHigh.toFixed(0),
-          Low: day.apparentTemperatureLow.toFixed(0),
+          High: Number(day.apparentTemperatureHigh.toFixed(0)),
+          Low: Number(day.apparentTemperatureLow.toFixed(0)),
         },
       ])
     })

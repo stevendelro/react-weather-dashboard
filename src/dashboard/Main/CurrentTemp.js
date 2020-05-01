@@ -14,7 +14,7 @@ const useStyles = makeStyles({
 export default function CurrentTemp({ state }) {
   const classes = useStyles()
   return (
-    <React.Fragment>
+    <>
       <Grid container direction='column' justify='center' alignItems='center'>
         <Typography align='center' component='h2' variant='h6' color='primary'>
           {state.weather.currently.today}
@@ -29,6 +29,6 @@ export default function CurrentTemp({ state }) {
           {state.weather.hourly.summary}
         </Typography>
       </Grid>
-    </React.Fragment>
+    </>
   )
 }

@@ -191,7 +191,7 @@ export default function Dashboard({
     setDisplayedPage('home')
   }
 
-  // This handler  us used for the AppBar search input.
+  // This handler is used for the AppBar search input.
   const submitHandler = async e => {
     e.preventDefault()
     const { latitude, longitude, placeName } = await getLocationData(

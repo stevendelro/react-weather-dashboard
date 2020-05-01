@@ -60,7 +60,7 @@ export const MainListItems = ({
           } else {
             closeDrawer()
             setDisplayedPage('hourly')
-            setAppBarTitle('Hourly Weather')
+            setAppBarTitle('Hourly')
           }
         }}>
         <ListItemIcon>
@@ -80,7 +80,7 @@ export const MainListItems = ({
           } else {
             closeDrawer()
             setDisplayedPage('daily')
-            setAppBarTitle('Daily Weather')
+            setAppBarTitle('Daily')
           }
         }}>
         <ListItemIcon>
@@ -100,7 +100,7 @@ export const MainListItems = ({
           } else {
             closeDrawer()
             setDisplayedPage('history')
-            setAppBarTitle('Search History')
+            setAppBarTitle('History')
           }
         }}>
         <ListItemIcon>

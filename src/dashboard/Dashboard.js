@@ -235,9 +235,6 @@ export default function Dashboard({
     )
   }
 
-  if (!state.deniedGeolocation && state.needsSearchPage) {
-    setDisplayedPage('home')
-  }
 
   return (
     <div className={classes.root}>

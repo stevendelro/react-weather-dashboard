@@ -14,7 +14,7 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-function WelcomePage({ location, setLocation, submitHandler }) {
+function SearchPage({ location, setLocation, submitHandler }) {
   const classes = useStyles()
   return (
     <>
@@ -50,4 +50,4 @@ function WelcomePage({ location, setLocation, submitHandler }) {
   )
 }
 
-export default WelcomePage
+export default SearchPage

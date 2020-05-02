@@ -235,10 +235,13 @@ export default function Dashboard({
     )
   }
 
+  if (!state.deniedGeolocation && state.needsSearchPage) {
+    setDisplayedPage('home')
+  }
+
   return (
     <div className={classes.root}>
       <CssBaseline />
-
       {/* AppBar */}
       <AppBar
         position='absolute'
@@ -320,7 +323,8 @@ export default function Dashboard({
       </Drawer>
 
       {/* Progress bar is shown in the main area while fetching data */}
-      {state.needsWelcomePage || state.weather.loading ? (
+      {(state.noWeatherData && state.needsSearchPage) ||
+      state.weather.loading ? (
         <LinearProgress
           className={classes.linearProgressBar}
           color='secondary'

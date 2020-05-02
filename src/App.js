@@ -7,7 +7,7 @@ import { getWeather, getPosition, getLocationData } from './util/index'
 
 const initialState = {
   deniedGeolocation: false,
-  needsWelcomePage: true,
+  needsSearchPage: true,
   error: {
     isTrue: false,
     mapBoxError: false,
@@ -94,10 +94,10 @@ function App() {
           ...state,
           deniedGeolocation: true,
         }
-      case 'WELCOME_PAGE_DISPLAYED':
+      case 'SEARCH_PAGE_DISPLAYED':
         return {
           ...state,
-          needsWelcomePage: false,
+          needsSearchPage: false,
         }
       case 'ERROR_MAPBOX':
         return {
@@ -188,8 +188,11 @@ function App() {
           type: 'SET_LOCATION',
           payload: locationData,
         })
-      }).catch( error => {
-        console.log('You denied auto-fetching the weather based on your browser\'s geolocation. Check your browser settings to reset and allow this feature.')
+      })
+      .catch(error => {
+        console.log(
+          "You denied auto-fetching the weather based on your browser's geolocation. Check your browser settings to reset and allow this feature."
+        )
       })
   }, [])
 
@@ -206,10 +209,10 @@ function App() {
   }, [state.location.placeName])
 
   // Handle rejected permission for geolocation positioning
-  if (state.deniedGeolocation && state.needsWelcomePage) {
-    setDisplayedPage('welcome')
+  if (state.deniedGeolocation && state.needsSearchPage) {
+    setDisplayedPage('search')
     dispatch({
-      type: 'WELCOME_PAGE_DISPLAYED',
+      type: 'SEARCH_PAGE_DISPLAYED',
     })
   }
 

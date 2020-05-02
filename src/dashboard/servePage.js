@@ -1,5 +1,5 @@
 import React from 'react'
-import WelcomePage from './WelcomePage'
+import SearchPage from './SearchPage'
 import HomePage from './Main/HomePage'
 import DailyPage from './Daily/DailyPage'
 import HourlyPage from './Hourly/HourlyPage'
@@ -20,9 +20,9 @@ const servePage = (state, pageName, location, setLocation, submitHandler) => {
     case 'history':
       return <SearchHistoryPage state={state} />
 
-    case 'welcome':
+    case 'search':
       return (
-        <WelcomePage
+        <SearchPage
           location={location}
           setLocation={setLocation}
           submitHandler={submitHandler}

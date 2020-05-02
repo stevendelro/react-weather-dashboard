@@ -33,9 +33,9 @@ export const MainListItems = ({
         onClick={() => {
           if (noWeatherData) {
             closeDrawer()
-            setDisplayedPage('welcome')
+            setDisplayedPage('search')
             dispatch({
-              type: 'WELCOME_PAGE_DISPLAYED',
+              type: 'SEARCH_PAGE_DISPLAYED',
             })
           } else {
             closeDrawer()
@@ -53,9 +53,9 @@ export const MainListItems = ({
         onClick={() => {
           if (noWeatherData) {
             closeDrawer()
-            setDisplayedPage('welcome')
+            setDisplayedPage('search')
             dispatch({
-              type: 'WELCOME_PAGE_DISPLAYED',
+              type: 'SEARCH_PAGE_DISPLAYED',
             })
           } else {
             closeDrawer()
@@ -73,9 +73,9 @@ export const MainListItems = ({
         onClick={() => {
           if (noWeatherData) {
             closeDrawer()
-            setDisplayedPage('welcome')
+            setDisplayedPage('search')
             dispatch({
-              type: 'WELCOME_PAGE_DISPLAYED',
+              type: 'SEARCH_PAGE_DISPLAYED',
             })
           } else {
             closeDrawer()
@@ -93,9 +93,9 @@ export const MainListItems = ({
         onClick={() => {
           if (noWeatherData) {
             closeDrawer()
-            setDisplayedPage('welcome')
+            setDisplayedPage('search')
             dispatch({
-              type: 'WELCOME_PAGE_DISPLAYED',
+              type: 'SEARCH_PAGE_DISPLAYED',
             })
           } else {
             closeDrawer()
